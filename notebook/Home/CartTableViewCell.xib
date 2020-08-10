@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="165" id="Cq4-hp-D7l" customClass="CartTableViewCell" customModule="notebook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="544" height="165"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cq4-hp-D7l" id="1dn-wN-gyi">
+                <rect key="frame" x="0.0" y="0.0" width="544" height="164.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="run-JD-ARX">
+                        <rect key="frame" x="36" y="27" width="472" height="111"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اسم الكتاب" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0Y-FX-bfQ">
+                                <rect key="frame" x="380.5" y="16" width="75.5" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GtR-yo-4na">
+                                <rect key="frame" x="16" y="10" width="30" height="30"/>
+                                <state key="normal" title="مسح">
+                                    <color key="titleColor" name="gold"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButtonClicked:" destination="Cq4-hp-D7l" eventType="touchUpInside" id="HeG-va-pXW"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الثمن" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fob-gg-j5O">
+                                <rect key="frame" x="16" y="74" width="36.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.74117647060000003" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnP-Mq-E6y">
+                                <rect key="frame" x="426" y="65" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="-">
+                                    <color key="titleColor" name="gold"/>
+                                </state>
+                                <connections>
+                                    <action selector="minusButtonClicked:" destination="Cq4-hp-D7l" eventType="touchUpInside" id="fEt-a4-cuE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzu-Hs-Bv3">
+                                <rect key="frame" x="386" y="69.5" width="32" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="ES2-eD-H5E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnr-M2-OF9">
+                                <rect key="frame" x="348" y="65" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" name="gold"/>
+                                </state>
+                                <connections>
+                                    <action selector="additionButtonClicked:" destination="Cq4-hp-D7l" eventType="touchUpInside" id="Qfo-LQ-Wxi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="GtR-yo-4na" firstAttribute="top" secondItem="run-JD-ARX" secondAttribute="top" constant="10" id="2dC-12-qsA"/>
+                            <constraint firstItem="Fob-gg-j5O" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GtR-yo-4na" secondAttribute="bottom" constant="16" id="2tE-Xu-UEa"/>
+                            <constraint firstAttribute="bottom" secondItem="DnP-Mq-E6y" secondAttribute="bottom" constant="16" id="4jq-5Z-po2"/>
+                            <constraint firstItem="r0Y-FX-bfQ" firstAttribute="top" secondItem="run-JD-ARX" secondAttribute="top" constant="16" id="5V9-cw-ufP"/>
+                            <constraint firstItem="DnP-Mq-E6y" firstAttribute="top" secondItem="r0Y-FX-bfQ" secondAttribute="bottom" constant="24" id="65v-Pv-ILO"/>
+                            <constraint firstAttribute="trailing" secondItem="DnP-Mq-E6y" secondAttribute="trailing" constant="16" id="Ccq-uR-hcm"/>
+                            <constraint firstItem="Fob-gg-j5O" firstAttribute="leading" secondItem="run-JD-ARX" secondAttribute="leading" constant="16" id="Cg2-gF-JW8"/>
+                            <constraint firstItem="r0Y-FX-bfQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GtR-yo-4na" secondAttribute="trailing" constant="8" id="D9W-jk-spu"/>
+                            <constraint firstItem="Wzu-Hs-Bv3" firstAttribute="centerY" secondItem="DnP-Mq-E6y" secondAttribute="centerY" id="T0W-Jt-rFS"/>
+                            <constraint firstAttribute="trailing" secondItem="r0Y-FX-bfQ" secondAttribute="trailing" constant="16" id="Wnc-cn-z2h"/>
+                            <constraint firstAttribute="bottom" secondItem="Fob-gg-j5O" secondAttribute="bottom" constant="16" id="hAq-8G-txG"/>
+                            <constraint firstItem="GtR-yo-4na" firstAttribute="leading" secondItem="run-JD-ARX" secondAttribute="leading" constant="16" id="lR1-iz-LpO"/>
+                            <constraint firstItem="Wzu-Hs-Bv3" firstAttribute="leading" secondItem="pnr-M2-OF9" secondAttribute="trailing" constant="8" id="odq-a0-EYL"/>
+                            <constraint firstItem="DnP-Mq-E6y" firstAttribute="leading" secondItem="Wzu-Hs-Bv3" secondAttribute="trailing" constant="8" id="ofg-MY-oCe"/>
+                            <constraint firstItem="pnr-M2-OF9" firstAttribute="centerY" secondItem="DnP-Mq-E6y" secondAttribute="centerY" id="xld-s4-nmV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="run-JD-ARX" secondAttribute="trailing" constant="16" id="0tX-b5-Fqq"/>
+                    <constraint firstItem="run-JD-ARX" firstAttribute="leading" secondItem="1dn-wN-gyi" secondAttribute="leadingMargin" constant="16" id="HEO-zB-t8k"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="run-JD-ARX" secondAttribute="bottom" constant="16" id="axm-9i-bDV"/>
+                    <constraint firstItem="run-JD-ARX" firstAttribute="top" secondItem="1dn-wN-gyi" secondAttribute="topMargin" constant="16" id="ejD-LK-Q6a"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="additionButton" destination="pnr-M2-OF9" id="xBk-nt-45n"/>
+                <outlet property="bookNameLabel" destination="r0Y-FX-bfQ" id="ZWa-iB-JhZ"/>
+                <outlet property="containerView" destination="run-JD-ARX" id="PHt-cc-Ez0"/>
+                <outlet property="counterLabel" destination="Wzu-Hs-Bv3" id="gAO-2f-FiU"/>
+                <outlet property="minusButton" destination="DnP-Mq-E6y" id="Yg8-Jr-v2b"/>
+                <outlet property="priceLabel" destination="Fob-gg-j5O" id="gdE-pA-wj2"/>
+            </connections>
+            <point key="canvasLocation" x="177.59999999999999" y="96.7016491754123"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="gold">
+            <color red="0.66274509803921566" green="0.57647058823529407" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

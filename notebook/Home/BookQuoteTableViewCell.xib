@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="93" id="cm0-37-qLg" customClass="BookQuoteTableViewCell" customModule="notebook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="93"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cm0-37-qLg" id="DN8-7x-ygu">
+                <rect key="frame" x="0.0" y="0.0" width="389" height="92.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qoute-up" translatesAutoresizingMaskIntoConstraints="NO" id="aWK-d9-Qnj">
+                        <rect key="frame" x="367" y="8" width="14" height="9"/>
+                        <color key="tintColor" name="gold"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3W-bx-Sj2">
+                        <rect key="frame" x="8" y="25" width="373" height="40"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qoute-down" translatesAutoresizingMaskIntoConstraints="NO" id="4Pd-2a-oea">
+                        <rect key="frame" x="8" y="73" width="15" height="9"/>
+                        <color key="tintColor" name="gold"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZ8-xn-U89">
+                        <rect key="frame" x="0.0" y="91.5" width="389" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ANc-z1-uZy"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="4Pd-2a-oea" secondAttribute="bottom" constant="10.5" id="2NK-fM-FRz"/>
+                    <constraint firstAttribute="trailing" secondItem="nZ8-xn-U89" secondAttribute="trailing" id="6dM-yr-1nj"/>
+                    <constraint firstItem="4Pd-2a-oea" firstAttribute="leading" secondItem="DN8-7x-ygu" secondAttribute="leading" constant="8" id="GPZ-nh-OFf"/>
+                    <constraint firstItem="4Pd-2a-oea" firstAttribute="top" secondItem="e3W-bx-Sj2" secondAttribute="bottom" constant="8" id="MIC-mJ-Rfj"/>
+                    <constraint firstAttribute="bottom" secondItem="nZ8-xn-U89" secondAttribute="bottom" id="OrO-cM-4Ul"/>
+                    <constraint firstItem="aWK-d9-Qnj" firstAttribute="top" secondItem="DN8-7x-ygu" secondAttribute="top" constant="8" id="PHS-rC-DME"/>
+                    <constraint firstAttribute="trailing" secondItem="aWK-d9-Qnj" secondAttribute="trailing" constant="8" id="SA1-Zl-eHi"/>
+                    <constraint firstItem="e3W-bx-Sj2" firstAttribute="leading" secondItem="DN8-7x-ygu" secondAttribute="leading" constant="8" id="a5s-mW-46k"/>
+                    <constraint firstAttribute="trailing" secondItem="e3W-bx-Sj2" secondAttribute="trailing" constant="8" id="hAc-4v-k8I"/>
+                    <constraint firstItem="e3W-bx-Sj2" firstAttribute="top" secondItem="aWK-d9-Qnj" secondAttribute="bottom" constant="8" id="jWc-9I-rC3"/>
+                    <constraint firstItem="nZ8-xn-U89" firstAttribute="leading" secondItem="DN8-7x-ygu" secondAttribute="leading" id="n51-gz-GDd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="quoteTextLabel" destination="e3W-bx-Sj2" id="QSe-Jb-h6C"/>
+                <outlet property="seperatorView" destination="nZ8-xn-U89" id="hox-fN-uk6"/>
+            </connections>
+            <point key="canvasLocation" x="120.8" y="101.19940029985008"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="qoute-down" width="15" height="9"/>
+        <image name="qoute-up" width="14" height="9"/>
+        <namedColor name="gold">
+            <color red="0.66274509803921566" green="0.57647058823529407" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

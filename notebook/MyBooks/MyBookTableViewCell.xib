@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Gulf-bold.ttf">
+            <string>Gulf-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="212" id="wxt-cJ-dV2" customClass="MyBookTableViewCell" customModule="notebook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="212"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wxt-cJ-dV2" id="4Ve-Me-Kc2">
+                <rect key="frame" x="0.0" y="0.0" width="447" height="211.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zBT-U8-BPE">
+                        <rect key="frame" x="20" y="55" width="361" height="120"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الصنف" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVD-er-O6h">
+                                <rect key="frame" x="275.5" y="24" width="39.5" height="14"/>
+                                <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="14"/>
+                                <color key="textColor" red="0.87058823529999996" green="0.73333333329999995" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اسم الكتاب" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjS-tx-sOm">
+                                <rect key="frame" x="225.5" y="50" width="89.5" height="18"/>
+                                <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الكاتب" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEd-AL-5P6">
+                                <rect key="frame" x="126" y="80" width="189" height="14"/>
+                                <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWo-8y-11Y">
+                                <rect key="frame" x="16" y="19.5" width="24" height="23"/>
+                                <state key="normal" image="icFav-2"/>
+                                <connections>
+                                    <action selector="favouriteButtonClicked:" destination="wxt-cJ-dV2" eventType="touchUpInside" id="4fw-dn-jkq"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kDR-5D-Idz">
+                                <rect key="frame" x="20" y="72" width="98" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khz-re-pyV">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
+                                        <color key="backgroundColor" name="gold"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="I4g-l2-05r"/>
+                                        </constraints>
+                                        <state key="normal" title="اقرا">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="readButtonClicked:" destination="wxt-cJ-dV2" eventType="touchUpInside" id="WDD-81-th1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hR-Y0-Hpd">
+                                        <rect key="frame" x="48" y="0.0" width="50" height="30"/>
+                                        <color key="backgroundColor" name="gold"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="EW1-Iz-mGx"/>
+                                        </constraints>
+                                        <state key="normal" title="استمع">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="listenButtonclicked:" destination="wxt-cJ-dV2" eventType="touchUpInside" id="nom-mP-8uC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="uWo-8y-11Y" firstAttribute="centerY" secondItem="zVD-er-O6h" secondAttribute="centerY" id="4bD-rp-1Sj"/>
+                            <constraint firstItem="SEd-AL-5P6" firstAttribute="trailing" secondItem="cjS-tx-sOm" secondAttribute="trailing" id="6tM-jt-zes"/>
+                            <constraint firstItem="SEd-AL-5P6" firstAttribute="leading" secondItem="kDR-5D-Idz" secondAttribute="trailing" constant="8" id="9PN-aY-RHX"/>
+                            <constraint firstItem="SEd-AL-5P6" firstAttribute="centerY" secondItem="kDR-5D-Idz" secondAttribute="centerY" id="O3B-Pm-5i1"/>
+                            <constraint firstItem="zVD-er-O6h" firstAttribute="top" secondItem="zBT-U8-BPE" secondAttribute="top" constant="24" id="TC4-ID-u8f"/>
+                            <constraint firstItem="uWo-8y-11Y" firstAttribute="leading" secondItem="zBT-U8-BPE" secondAttribute="leading" constant="16" id="bfF-r3-b0N"/>
+                            <constraint firstItem="cjS-tx-sOm" firstAttribute="trailing" secondItem="zVD-er-O6h" secondAttribute="trailing" id="dv2-mD-2oj"/>
+                            <constraint firstItem="cjS-tx-sOm" firstAttribute="top" secondItem="zVD-er-O6h" secondAttribute="bottom" constant="12" id="fD4-Vw-ZIA"/>
+                            <constraint firstItem="kDR-5D-Idz" firstAttribute="leading" secondItem="zBT-U8-BPE" secondAttribute="leading" constant="20" id="fGK-iM-mXe"/>
+                            <constraint firstItem="SEd-AL-5P6" firstAttribute="top" secondItem="cjS-tx-sOm" secondAttribute="bottom" constant="12" id="g4U-hB-w5Q"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pn7-U2-D6r">
+                        <rect key="frame" x="351" y="70" width="60" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="8Gd-e8-Kmi"/>
+                            <constraint firstAttribute="width" constant="60" id="QmD-7C-6dX"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="pn7-U2-D6r" secondAttribute="trailing" constant="16" id="70x-9m-cT5"/>
+                    <constraint firstItem="zBT-U8-BPE" firstAttribute="top" secondItem="4Ve-Me-Kc2" secondAttribute="topMargin" id="73b-5Q-Cs3"/>
+                    <constraint firstItem="zBT-U8-BPE" firstAttribute="bottom" secondItem="pn7-U2-D6r" secondAttribute="bottom" constant="15" id="ABI-Sg-H8A"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="zBT-U8-BPE" secondAttribute="bottom" id="BXS-Ev-BiN"/>
+                    <constraint firstItem="zBT-U8-BPE" firstAttribute="top" secondItem="pn7-U2-D6r" secondAttribute="top" constant="-15" id="Gyb-5R-Zwe"/>
+                    <constraint firstItem="pn7-U2-D6r" firstAttribute="centerY" secondItem="4Ve-Me-Kc2" secondAttribute="centerY" id="HVC-i3-zBS"/>
+                    <constraint firstItem="zBT-U8-BPE" firstAttribute="leading" secondItem="4Ve-Me-Kc2" secondAttribute="leadingMargin" id="moK-6I-6OL"/>
+                    <constraint firstItem="pn7-U2-D6r" firstAttribute="leading" secondItem="zVD-er-O6h" secondAttribute="trailing" constant="16" id="mq7-PP-ike"/>
+                    <constraint firstItem="pn7-U2-D6r" firstAttribute="leading" secondItem="zBT-U8-BPE" secondAttribute="trailing" constant="-30" id="xnh-o9-vua"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="bookCoverImage" destination="pn7-U2-D6r" id="m9b-Nw-Vu4"/>
+                <outlet property="bookGenreLabel" destination="zVD-er-O6h" id="m7a-sm-8XC"/>
+                <outlet property="bookNameLabel" destination="cjS-tx-sOm" id="85a-J2-5lT"/>
+                <outlet property="containerView" destination="zBT-U8-BPE" id="1mR-M0-ufa"/>
+                <outlet property="favouriteButton" destination="uWo-8y-11Y" id="wjp-rO-z90"/>
+                <outlet property="listenButton" destination="8hR-Y0-Hpd" id="CJ8-yY-qCd"/>
+                <outlet property="readButton" destination="khz-re-pyV" id="iFP-7x-LtP"/>
+                <outlet property="writerLabel" destination="SEd-AL-5P6" id="dTM-Br-t2k"/>
+            </connections>
+            <point key="canvasLocation" x="-76.08695652173914" y="34.151785714285715"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icFav-2" width="24" height="23"/>
+        <namedColor name="gold">
+            <color red="0.66274509803921566" green="0.57647058823529407" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

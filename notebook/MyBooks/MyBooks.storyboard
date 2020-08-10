@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7iH-v4-X1W">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Gulf-bold.ttf">
+            <string>Gulf-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--كتبي-->
+        <scene sceneID="4Ey-iV-U2M">
+            <objects>
+                <navigationController id="7iH-v4-X1W" customClass="NBParentNavigationControllerViewController" customModule="notebook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="كتبي" image="icMybooks" selectedImage="icMybooksSelected" id="N0E-oX-VWX">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7hl-lF-IXM">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2Nx-Xg-24O" kind="relationship" relationship="rootViewController" id="jnX-J9-yEE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dge-M3-rRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="220" y="-146"/>
+        </scene>
+        <!--My Books View Controller-->
+        <scene sceneID="Snf-h0-m1X">
+            <objects>
+                <viewController id="2Nx-Xg-24O" customClass="MyBooksViewController" customModule="notebook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O5Z-dx-2Wm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LBy-Ld-wea">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcs-2x-xYy">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nobooks" translatesAutoresizingMaskIntoConstraints="NO" id="8xs-TH-J8w">
+                                        <rect key="frame" x="179.5" y="186" width="16" height="16"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="أهلا بك في نوت بوك يسعدنا إنضمامك إلينا" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOM-Nt-a6d">
+                                        <rect key="frame" x="55" y="237" width="265.5" height="21"/>
+                                        <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruO-ml-66i">
+                                        <rect key="frame" x="62.5" y="283" width="250" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="AKm-K4-6Hr"/>
+                                            <constraint firstAttribute="width" constant="250" id="QaK-So-pYB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="14"/>
+                                        <state key="normal" title="تسجيل الدخول">
+                                            <color key="titleColor" name="gold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButtonClicked:" destination="2Nx-Xg-24O" eventType="touchUpInside" id="VqD-eu-1R8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="black"/>
+                                <constraints>
+                                    <constraint firstItem="ruO-ml-66i" firstAttribute="centerX" secondItem="Lcs-2x-xYy" secondAttribute="centerX" id="4In-R5-qkd"/>
+                                    <constraint firstItem="eOM-Nt-a6d" firstAttribute="top" secondItem="8xs-TH-J8w" secondAttribute="bottom" constant="35" id="F3G-vf-efI"/>
+                                    <constraint firstItem="8xs-TH-J8w" firstAttribute="centerY" secondItem="Lcs-2x-xYy" secondAttribute="centerY" multiplier="0.7" id="JiZ-8I-iR8"/>
+                                    <constraint firstItem="eOM-Nt-a6d" firstAttribute="centerX" secondItem="Lcs-2x-xYy" secondAttribute="centerX" id="LAe-Kp-idG"/>
+                                    <constraint firstItem="eOM-Nt-a6d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lcs-2x-xYy" secondAttribute="leading" constant="4" id="gOs-SB-WfH"/>
+                                    <constraint firstItem="8xs-TH-J8w" firstAttribute="centerX" secondItem="Lcs-2x-xYy" secondAttribute="centerX" id="i4P-ZB-DZI"/>
+                                    <constraint firstItem="ruO-ml-66i" firstAttribute="top" secondItem="eOM-Nt-a6d" secondAttribute="bottom" constant="25" id="rqg-fv-LHL"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eOM-Nt-a6d" secondAttribute="trailing" constant="4" id="yFo-1M-EEv"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="black"/>
+                        <constraints>
+                            <constraint firstItem="1tX-hb-2wY" firstAttribute="trailing" secondItem="Lcs-2x-xYy" secondAttribute="trailing" id="2Z5-3y-g1o"/>
+                            <constraint firstItem="LBy-Ld-wea" firstAttribute="top" secondItem="1tX-hb-2wY" secondAttribute="top" id="JFK-DX-GG1"/>
+                            <constraint firstItem="LBy-Ld-wea" firstAttribute="leading" secondItem="1tX-hb-2wY" secondAttribute="leading" id="aSA-tr-fyM"/>
+                            <constraint firstItem="1tX-hb-2wY" firstAttribute="bottom" secondItem="LBy-Ld-wea" secondAttribute="bottom" id="hnW-gw-hEd"/>
+                            <constraint firstItem="1tX-hb-2wY" firstAttribute="trailing" secondItem="LBy-Ld-wea" secondAttribute="trailing" id="jux-0d-3jz"/>
+                            <constraint firstItem="1tX-hb-2wY" firstAttribute="bottom" secondItem="Lcs-2x-xYy" secondAttribute="bottom" id="p5D-M9-1tz"/>
+                            <constraint firstItem="Lcs-2x-xYy" firstAttribute="top" secondItem="1tX-hb-2wY" secondAttribute="top" id="v12-5J-aoe"/>
+                            <constraint firstItem="Lcs-2x-xYy" firstAttribute="leading" secondItem="1tX-hb-2wY" secondAttribute="leading" id="wIz-Q6-nbc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1tX-hb-2wY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RP5-ho-26h"/>
+                    <connections>
+                        <outlet property="containerView" destination="Lcs-2x-xYy" id="anB-OX-nUn"/>
+                        <outlet property="loginButton" destination="ruO-ml-66i" id="kkb-IR-7FI"/>
+                        <outlet property="messageLabel" destination="eOM-Nt-a6d" id="SIp-dL-Tfk"/>
+                        <outlet property="myBooksTableView" destination="LBy-Ld-wea" id="ACV-O1-pHo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HhQ-lF-jO7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="-146.17691154422789"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icMybooks" width="18" height="16"/>
+        <image name="icMybooksSelected" width="18" height="16"/>
+        <image name="nobooks" width="102" height="103"/>
+        <namedColor name="black">
+            <color red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gold">
+            <color red="0.66274509803921566" green="0.57647058823529407" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

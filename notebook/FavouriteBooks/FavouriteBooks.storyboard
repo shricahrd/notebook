@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WxU-68-csx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Gulf-bold.ttf">
+            <string>Gulf-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--المفضلة-->
+        <scene sceneID="cAe-nB-twV">
+            <objects>
+                <navigationController id="WxU-68-csx" customClass="NBParentNavigationControllerViewController" customModule="notebook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="المفضلة" image="icFav" id="Xn9-PE-n2f">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-4"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3NO-qH-4k6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="kvc-Eb-DXc" kind="relationship" relationship="rootViewController" id="2vp-tf-dV9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZFE-yY-PHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-958" y="13"/>
+        </scene>
+        <!--Favourite Books View Controller-->
+        <scene sceneID="yYD-lX-T0z">
+            <objects>
+                <viewController id="kvc-Eb-DXc" customClass="FavouriteBooksViewController" customModule="notebook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ud9-5b-rW2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="A6V-cP-HDC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16i-3P-dxZ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookmark" translatesAutoresizingMaskIntoConstraints="NO" id="NuJ-ja-mGg">
+                                        <rect key="frame" x="138" y="134.5" width="99" height="119"/>
+                                    </imageView>
+                                    <label opaque="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اهلا بك في نوت يوم يسعدنا انضمامك إلينا" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnw-N3-uZ8">
+                                        <rect key="frame" x="26" y="313.5" width="323" height="18"/>
+                                        <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7F-hC-6CW">
+                                        <rect key="frame" x="62.5" y="355.5" width="250" height="40"/>
+                                        <color key="backgroundColor" name="gold"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="8Io-W8-jDs"/>
+                                            <constraint firstAttribute="height" constant="40" id="zVu-DE-0dt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="14"/>
+                                        <state key="normal" title="تسجيل الدخول">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButtonClicked:" destination="kvc-Eb-DXc" eventType="touchUpInside" id="P7b-2w-yit"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="black"/>
+                                <constraints>
+                                    <constraint firstItem="NuJ-ja-mGg" firstAttribute="centerY" secondItem="16i-3P-dxZ" secondAttribute="centerY" multiplier="0.7" id="5ra-kX-50O"/>
+                                    <constraint firstItem="q7F-hC-6CW" firstAttribute="top" secondItem="Qnw-N3-uZ8" secondAttribute="bottom" constant="24" id="HP4-TC-8pu"/>
+                                    <constraint firstItem="q7F-hC-6CW" firstAttribute="centerX" secondItem="16i-3P-dxZ" secondAttribute="centerX" id="K3W-GG-2zB"/>
+                                    <constraint firstItem="NuJ-ja-mGg" firstAttribute="centerX" secondItem="16i-3P-dxZ" secondAttribute="centerX" id="KSo-2W-Etd"/>
+                                    <constraint firstItem="Qnw-N3-uZ8" firstAttribute="top" secondItem="NuJ-ja-mGg" secondAttribute="bottom" constant="60" id="g4H-J3-OYo"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qnw-N3-uZ8" secondAttribute="trailing" constant="4" id="i5D-Lf-Dcb"/>
+                                    <constraint firstItem="Qnw-N3-uZ8" firstAttribute="centerX" secondItem="16i-3P-dxZ" secondAttribute="centerX" id="jg8-iG-z1B"/>
+                                    <constraint firstItem="Qnw-N3-uZ8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="16i-3P-dxZ" secondAttribute="leading" constant="4" id="pk4-LX-2Rp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="black"/>
+                        <constraints>
+                            <constraint firstItem="A6V-cP-HDC" firstAttribute="leading" secondItem="P5O-jH-MJQ" secondAttribute="leading" id="0zL-5l-uW6"/>
+                            <constraint firstItem="P5O-jH-MJQ" firstAttribute="trailing" secondItem="A6V-cP-HDC" secondAttribute="trailing" id="CEa-sN-v32"/>
+                            <constraint firstItem="P5O-jH-MJQ" firstAttribute="bottom" secondItem="A6V-cP-HDC" secondAttribute="bottom" id="OvM-Ss-rIM"/>
+                            <constraint firstItem="A6V-cP-HDC" firstAttribute="top" secondItem="P5O-jH-MJQ" secondAttribute="top" id="amW-iJ-Ly0"/>
+                            <constraint firstItem="P5O-jH-MJQ" firstAttribute="trailing" secondItem="16i-3P-dxZ" secondAttribute="trailing" id="cen-s3-OIf"/>
+                            <constraint firstItem="16i-3P-dxZ" firstAttribute="leading" secondItem="P5O-jH-MJQ" secondAttribute="leading" id="gYz-WU-aY2"/>
+                            <constraint firstItem="16i-3P-dxZ" firstAttribute="top" secondItem="P5O-jH-MJQ" secondAttribute="top" id="nPY-jj-Khm"/>
+                            <constraint firstItem="P5O-jH-MJQ" firstAttribute="bottom" secondItem="16i-3P-dxZ" secondAttribute="bottom" id="zlY-K6-bBO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="P5O-jH-MJQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rLV-1z-7fk"/>
+                    <connections>
+                        <outlet property="containerView" destination="16i-3P-dxZ" id="E47-6f-xtb"/>
+                        <outlet property="favouriteBookTableView" destination="A6V-cP-HDC" id="vbZ-F6-RK2"/>
+                        <outlet property="loginButton" destination="q7F-hC-6CW" id="eIy-ZG-DSm"/>
+                        <outlet property="messageLabel" destination="Qnw-N3-uZ8" id="diu-Zm-9au"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sap-hO-pWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-124" y="12"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bookmark" width="99" height="119"/>
+        <image name="icFav" width="16" height="16"/>
+        <namedColor name="black">
+            <color red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gold">
+            <color red="0.66274509803921566" green="0.57647058823529407" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

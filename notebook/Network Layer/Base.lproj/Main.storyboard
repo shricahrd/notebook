@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YeE-B1-onW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Parent Tab Bar View Controller-->
+        <scene sceneID="cSH-BA-gpS">
+            <objects>
+                <tabBarController id="YeE-B1-onW" customClass="NBParentTabBarViewController" customModule="notebook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="lTj-Yv-Dnx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.070588235289999995" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="jeM-1X-VqM" kind="relationship" relationship="viewControllers" id="pdR-FM-Irm"/>
+                        <segue destination="g1B-1j-eSG" kind="relationship" relationship="viewControllers" id="k0V-dN-cWQ"/>
+                        <segue destination="OkN-Lf-fTT" kind="relationship" relationship="viewControllers" id="WZO-Oq-fmV"/>
+                        <segue destination="Okn-xG-yHC" kind="relationship" relationship="viewControllers" id="7Bj-rs-w2G"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbj-Dp-8C8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-524" y="361"/>
+        </scene>
+        <!--More-->
+        <scene sceneID="zJY-E0-ne4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="More" id="Okn-xG-yHC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="المزيد" id="GWr-vK-apk"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q8M-cg-8kb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122" y="90"/>
+        </scene>
+        <!--FavouriteBooks-->
+        <scene sceneID="M0H-Vd-MTA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FavouriteBooks" id="OkN-Lf-fTT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="tdJ-dh-5f2"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yKf-II-xrC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="181" y="186"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="Jhf-hr-qfU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="jeM-1X-VqM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="الرئيسية" id="qPv-XQ-kv6"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBg-YE-Ovz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="147" y="360"/>
+        </scene>
+        <!--MyBooks-->
+        <scene sceneID="0t3-b3-FON">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MyBooks" id="g1B-1j-eSG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="كتبي" id="RaQ-Ul-bwS"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6d9-TF-vxE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="541"/>
+        </scene>
+    </scenes>
+</document>
