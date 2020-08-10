@@ -48,6 +48,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             self.window?.rootViewController = bookDetailsVC
         }
     }
+    
+    /*
+    func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+         guard let url = dynamicLink.url else {
+             print("no url")
+             return
+         }
+         print("new URL IS \(url.absoluteString)")
+         var bookurl = url.absoluteString
+         
+         let wordToRemove = "http://admin.notebooklib.com/"
+         if let range = bookurl.range(of: wordToRemove) {
+             bookurl.removeSubrange(range)
+         }
+
+         let bookID = bookurl
+         let storyboard = UIStoryboard.init(name: "Home", bundle: nil)
+         if let bookDetailsVC = storyboard.instantiateViewController(withIdentifier: "BookDetailsViewController") as? BookDetailsViewController {
+             let bookIdString = bookID
+             bookDetailsVC.bookId = bookIdString
+             bookDetailsVC.fromAppDelegate = true
+             self.window?.rootViewController = bookDetailsVC
+         }
+     }
+    */
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if let incomingURL = userActivity.webpageURL {
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { (dynamicLink, error) in
