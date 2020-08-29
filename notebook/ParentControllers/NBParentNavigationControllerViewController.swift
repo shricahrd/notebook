@@ -81,6 +81,14 @@ class NBParentNavigationControllerViewController: UINavigationController {
         popViewController(animated: true)
     }
     
+    func addBackButtonWithDismiss(){
+        navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "left"), style: .plain, target: self, action: #selector(self.backButtonTapped))
+    }
+    
+    @objc func backButtonTappedWithDismiss(){
+        popViewController(animated: true)
+    }
+    
     var cartButton: UIBarButtonItem?
     
     func addCartButton(){

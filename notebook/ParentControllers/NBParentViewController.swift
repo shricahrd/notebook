@@ -56,12 +56,19 @@ class NBParentViewController: UIViewController {
     
     func goToLogin(){
         let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
-        if let loginViewController = storyboard.instantiateInitialViewController() as? LoginViewController{
+        if let loginNavigationController = storyboard.instantiateInitialViewController() as? NBParentNavigationControllerViewController {
             if NBParentViewController.window == nil{
                 NBParentViewController.window = UIWindow.init(frame: UIScreen.main.bounds)
             }
-            NBParentViewController.window?.rootViewController = loginViewController
+            NBParentViewController.window?.rootViewController = loginNavigationController
             NBParentViewController.window?.makeKeyAndVisible()
+        }
+    }
+    
+    func goToTremsAndConditions(){
+        let storyboard = UIStoryboard.init(name: "More", bundle: nil)
+        if let termsAndConditionsVC = storyboard.instantiateViewController(withIdentifier: "TermsAndConditionsViewController") as? TermsAndConditionsViewController {
+            navigationController?.pushViewController(termsAndConditionsVC, animated: true)
         }
     }
     

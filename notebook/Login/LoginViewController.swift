@@ -46,6 +46,12 @@ class LoginViewController: NBParentViewController {
         //loginViewModel.countryCodez()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
+    }
+    
     func setupView(){
         //loginButton.setGradientBackground(horizontalMode: true)
         loginButton.roundCorners(withRadius: 6)

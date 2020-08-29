@@ -28,6 +28,12 @@ class ForgetPasswordViewController: NBParentViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
+    }
+    
     func setupView(){
         loginButton.titleLabel?.font = UIFont.GulfBold(withSize: FontSize.vTiny)
         sendPasswordButton.titleLabel?.font = UIFont.GulfBold(withSize: FontSize.vTiny)

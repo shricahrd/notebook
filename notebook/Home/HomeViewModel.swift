@@ -33,7 +33,9 @@ class HomeViewModel: NBParentViewModel {
                 if let defaultItem = defaultItem{
                     self?.homeViewController?.genresDataSourceVariable.value.append(defaultItem)
                 }
-                self?.homeViewController?.mostReadBooksDataSourceVariable.value = data.data?.mostRead ?? []
+                
+                self?.homeViewController?.mostReadBooksDataSourceVariable.value = self?.filterMostReadWithListenPrice(mostReadArray: data.data?.mostRead) ?? []
+                
                 self?.homeViewController?.userGenresDataSourceVariable.value = data.data?.userGenres ?? []
                 if let imageObject = data.data?.adImage{
                     self?.homeViewController?.adImageDataSourceVariable.value = imageObject
@@ -91,5 +93,19 @@ class HomeViewModel: NBParentViewModel {
                 self?.homeViewController?.hideLoadingView()
         })
     }
+}
 
+extension HomeViewModel{
+    func filterMostReadWithListenPrice(mostReadArray: [AdBook]?) -> [AdBook] {
+        var filterMostRead: [AdBook] = []
+        if let mostReadArray = mostReadArray {
+            filterMostRead = mostReadArray.filter( { (book: AdBook) -> Bool in
+                if let listenPrice = book.listenPrice{
+                    return Float(listenPrice) > 0
+                }
+                return false
+            })
+        }
+        return filterMostRead
+    }
 }
