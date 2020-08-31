@@ -384,7 +384,7 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
         readCopyTextLabel.text = "كتاب الكتروني"
         readCopyPriceLabel.text = ""
         readCopyBuyButton.setTitle("اقرأ", for: .normal)
-        readCopyBuyButton.backgroundColor = UIColor.NBGreenColor()
+        readCopyBuyButton.backgroundColor = UIColor.NBGoldColor()
         bookReadingLink = link
         readCopyBuyButton.addTarget(self, action: #selector(openBookReader(_:)), for: .touchUpInside)
     }
@@ -409,7 +409,7 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
         voiceCopyTextLabel.text = "كتاب صوتي"
         voiceCopyPriceLabel.text = ""
         voiceCopyBuyButton.setTitle("استمع", for: .normal)
-        voiceCopyBuyButton.backgroundColor = UIColor.NBGreenColor()
+        voiceCopyBuyButton.backgroundColor = UIColor.NBGoldColor()
         bookListeningLink = link
         
         voiceCopyBuyButton.removeTarget(self, action: #selector(buyVoiceCopy(_:)), for: .touchUpInside)
