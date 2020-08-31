@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Ah-uQ-l4q">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Ah-uQ-l4q">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +26,7 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Q5-kP-tSf">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -48,7 +46,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uu0-fi-mGw">
-                                <rect key="frame" x="0.0" y="64" width="414" height="1387"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="1407"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8y-I9-LKT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1478"/>
@@ -138,13 +136,13 @@
                                                         <rect key="frame" x="157.66666666666666" y="100" width="98.999999999999972" height="119"/>
                                                     </imageView>
                                                     <label opaque="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="عفواً أنت غير متصل بالإنترنت، ولكن يمكنك قراءة كتبك بالضغط هنا" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1E-R6-fKh">
-                                                        <rect key="frame" x="22.666666666666657" y="279" width="368.66666666666674" height="36"/>
+                                                        <rect key="frame" x="40.666666666666657" y="279" width="333" height="42"/>
                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="18"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rb-WJ-wa5">
-                                                        <rect key="frame" x="82" y="339" width="250" height="40"/>
+                                                        <rect key="frame" x="82" y="345" width="250" height="40"/>
                                                         <color key="backgroundColor" name="gold"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="250" id="olj-wO-hRq"/>
@@ -250,13 +248,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ooq-9L-MRv">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1461.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1467.6666666666667"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-XR-5D3">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="570"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="572.33333333333337"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xi4-LY-4bt">
-                                                <rect key="frame" x="0.0" y="199.99999999999994" width="414" height="883.66666666666652"/>
+                                                <rect key="frame" x="0.0" y="199.99999999999994" width="414" height="889.66666666666652"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="التصنيف" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjX-0F-Dcb">
                                                         <rect key="frame" x="30" y="30" width="354" height="23"/>
@@ -277,7 +275,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ntr-DM-dLr">
-                                                        <rect key="frame" x="334" y="98" width="50" height="28"/>
+                                                        <rect key="frame" x="351" y="98" width="33" height="31"/>
                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                         <state key="normal" title="المؤلف">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -287,14 +285,14 @@
                                                         </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ifStar1904673" translatesAutoresizingMaskIntoConstraints="NO" id="PyP-bz-ti9">
-                                                        <rect key="frame" x="364" y="144" width="20" height="20"/>
+                                                        <rect key="frame" x="364" y="147" width="20" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="DQ3-dl-g7k"/>
                                                             <constraint firstAttribute="height" constant="20" id="xci-b3-H3Q"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="عدد الترشيحات" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Os5-lq-ZXv">
-                                                        <rect key="frame" x="8" y="142.66666666666669" width="348" height="23"/>
+                                                        <rect key="frame" x="8" y="145.66666666666669" width="348" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="23" id="chN-Qn-Pif"/>
                                                         </constraints>
@@ -303,13 +301,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="وصف" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMu-kM-qWb">
-                                                        <rect key="frame" x="30" y="195.66666666666669" width="354" height="17"/>
+                                                        <rect key="frame" x="30" y="198.66666666666669" width="354" height="20"/>
                                                         <fontDescription key="fontDescription" name="Gulf-Text" family="Gulf" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2OT-aV-RPE">
-                                                        <rect key="frame" x="30" y="266.66666666666669" width="354" height="312.00000000000006"/>
+                                                        <rect key="frame" x="30" y="272.66666666666669" width="354" height="312.00000000000006"/>
                                                         <subviews>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ufa-nO-wzm">
                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="52"/>
@@ -353,7 +351,7 @@
                                                                 <rect key="frame" x="0.0" y="51.999999999999943" width="354" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نسخة مقروءة" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLP-yd-jzd">
-                                                                        <rect key="frame" x="254" y="0.0" width="92" height="52"/>
+                                                                        <rect key="frame" x="275.33333333333331" y="0.0" width="70.666666666666686" height="52"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -366,7 +364,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNh-jZ-2d1">
-                                                                        <rect key="frame" x="16" y="13" width="65" height="26"/>
+                                                                        <rect key="frame" x="16" y="11.333333333333371" width="65" height="29"/>
                                                                         <color key="backgroundColor" name="gold"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="65" id="Jgp-CL-AUO"/>
@@ -377,7 +375,7 @@
                                                                         </state>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الثمن" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="D5l-Hz-CZM">
-                                                                        <rect key="frame" x="89" y="0.0" width="39" height="51"/>
+                                                                        <rect key="frame" x="89" y="0.0" width="29" height="51"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -404,7 +402,7 @@
                                                                 <rect key="frame" x="0.0" y="103.99999999999994" width="354" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نسخة مسموعة" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKK-Yi-KWw">
-                                                                        <rect key="frame" x="242.33333333333329" y="0.0" width="103.66666666666666" height="52"/>
+                                                                        <rect key="frame" x="266.33333333333331" y="0.0" width="79.666666666666686" height="52"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -417,7 +415,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJ6-5t-yiU">
-                                                                        <rect key="frame" x="16" y="13" width="65" height="26"/>
+                                                                        <rect key="frame" x="16" y="11.333333333333371" width="65" height="29"/>
                                                                         <color key="backgroundColor" name="gold"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="65" id="sf7-gI-2ce"/>
@@ -428,7 +426,7 @@
                                                                         </state>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الثمن" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="OjJ-Ri-fel">
-                                                                        <rect key="frame" x="89" y="0.0" width="39" height="51"/>
+                                                                        <rect key="frame" x="89" y="0.0" width="29" height="51"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -455,13 +453,13 @@
                                                                 <rect key="frame" x="0.0" y="155.99999999999994" width="354" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="كلاهما" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERL-MH-5ec">
-                                                                        <rect key="frame" x="302" y="0.0" width="44" height="52"/>
+                                                                        <rect key="frame" x="309.33333333333331" y="0.0" width="36.666666666666686" height="52"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfj-D0-0wQ">
-                                                                        <rect key="frame" x="16" y="13" width="65" height="26"/>
+                                                                        <rect key="frame" x="16" y="11.333333333333371" width="65" height="29"/>
                                                                         <color key="backgroundColor" name="gold"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="65" id="kIz-UT-kor"/>
@@ -472,7 +470,7 @@
                                                                         </state>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الثمن" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="P3s-l4-pMN">
-                                                                        <rect key="frame" x="89" y="0.0" width="39" height="52"/>
+                                                                        <rect key="frame" x="89" y="0.0" width="29" height="52"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -506,13 +504,13 @@
                                                                 <rect key="frame" x="0.0" y="207.99999999999994" width="354" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نسخة  مطبوعة" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jji-TZ-fsj">
-                                                                        <rect key="frame" x="244.66666666666671" y="0.0" width="101.33333333333334" height="52"/>
+                                                                        <rect key="frame" x="266.33333333333331" y="0.0" width="79.666666666666686" height="52"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b99-Ck-DGB">
-                                                                        <rect key="frame" x="16" y="13" width="115" height="26"/>
+                                                                        <rect key="frame" x="16" y="11.333333333333371" width="115" height="29"/>
                                                                         <color key="backgroundColor" name="gold"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="115" id="2sx-5N-0RJ"/>
@@ -523,7 +521,7 @@
                                                                         </state>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الثمن" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="lFx-LJ-WvD">
-                                                                        <rect key="frame" x="139" y="0.0" width="39" height="52"/>
+                                                                        <rect key="frame" x="139" y="0.0" width="29" height="52"/>
                                                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="16"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -608,7 +606,7 @@
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </stackView>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="354" placeholderIntrinsicHeight="200" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uFd-nX-fwc" customClass="IntrisicTableView" customModule="notebook" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="653.66666666666663" width="354" height="200"/>
+                                                        <rect key="frame" x="30" y="659.66666666666663" width="354" height="200"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" id="ASN-zs-faD"/>
@@ -620,7 +618,7 @@
                                                         </variation>
                                                     </tableView>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مقتطفات من الكتاب" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNe-IX-OdL">
-                                                        <rect key="frame" x="211.66666666666663" y="614.66666666666663" width="172.33333333333337" height="23"/>
+                                                        <rect key="frame" x="249.33333333333337" y="620.66666666666663" width="134.66666666666663" height="23"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="23" id="sSI-eY-4m2"/>
                                                         </constraints>
@@ -696,7 +694,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اقرأ أيضاً" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frI-D3-j0w">
-                                                <rect key="frame" x="30" y="1128.6666666666667" width="354" height="23"/>
+                                                <rect key="frame" x="30" y="1134.6666666666667" width="354" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="23" id="d78-Ec-ovk"/>
                                                 </constraints>
@@ -705,7 +703,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GlW-Ck-Q1R">
-                                                <rect key="frame" x="0.0" y="1171.6666666666667" width="414" height="230"/>
+                                                <rect key="frame" x="0.0" y="1177.6666666666667" width="414" height="230"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="230" id="nLs-hu-euP"/>
@@ -836,10 +834,10 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gift-2" translatesAutoresizingMaskIntoConstraints="NO" id="13C-L3-KUJ">
-                                        <rect key="frame" x="179" y="50.000000000000014" width="16" height="16"/>
+                                        <rect key="frame" x="133.66666666666666" y="50.000000000000014" width="107" height="105.99999999999999"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l06-Tk-tzL">
-                                        <rect key="frame" x="62" y="220.33333333333337" width="250" height="40"/>
+                                        <rect key="frame" x="62" y="310.33333333333337" width="250" height="40"/>
                                         <color key="backgroundColor" name="gold"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="JGF-FO-aq0"/>
@@ -854,19 +852,19 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="أدخل كود الإهداء" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjR-WE-cit">
-                                        <rect key="frame" x="129.66666666666666" y="86.000000000000014" width="115" height="21"/>
+                                        <rect key="frame" x="129.66666666666666" y="176" width="115" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="كود الإهداء يتم الحصول عليه عن طريق الكاتب" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMZ-q0-gsy">
-                                        <rect key="frame" x="16" y="122.00000000000001" width="342" height="20.333333333333329"/>
+                                        <rect key="frame" x="16" y="212" width="342" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHV-D8-t1l">
-                                        <rect key="frame" x="0.0" y="166.33333333333337" width="374" height="34"/>
+                                        <rect key="frame" x="0.0" y="256.33333333333337" width="374" height="34"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="الكود" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tb8-eI-TAh">
                                                 <rect key="frame" x="30" y="8" width="314" height="25"/>
@@ -953,7 +951,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83a-kM-yj2">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xBa-Lr-JvR">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -1070,7 +1068,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fic-mp-tpK">
-                                <rect key="frame" x="362" y="52" width="30" height="30"/>
+                                <rect key="frame" x="362" y="32" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="U24-Sb-Kzk"/>
                                     <constraint firstAttribute="width" constant="30" id="l8s-lQ-Z1b"/>
@@ -1122,13 +1120,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Sl-EZ-JGF">
-                                <rect key="frame" x="50" y="489.33333333333331" width="17" height="12"/>
+                                <rect key="frame" x="50" y="489.33333333333331" width="17" height="14"/>
                                 <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqy-hz-gcs">
-                                <rect key="frame" x="347" y="489.33333333333331" width="17" height="12"/>
+                                <rect key="frame" x="347" y="489.33333333333331" width="17" height="14"/>
                                 <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1180,7 +1178,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tNQ-jA-4Ue">
-                                <rect key="frame" x="0.0" y="36" width="414" height="565"/>
+                                <rect key="frame" x="0.0" y="16" width="414" height="585"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNQ-y2-ewR">
@@ -1218,13 +1216,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSx-Go-wfG">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nobooks" translatesAutoresizingMaskIntoConstraints="NO" id="zXa-Ea-1U8">
-                                        <rect key="frame" x="199" y="242.66666666666669" width="16" height="16"/>
+                                        <rect key="frame" x="156" y="206" width="102" height="103"/>
                                     </imageView>
                                     <label opaque="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ليس لديك أي كتب في السلة\n\n ابدأ بتصفح الكتب الآن" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gv-OO-2I6">
-                                        <rect key="frame" x="33" y="318.66666666666669" width="348" height="21"/>
+                                        <rect key="frame" x="33" y="369" width="348" height="21"/>
                                         <fontDescription key="fontDescription" name="Gulf-Bold" family="Gulf" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

@@ -44,11 +44,25 @@ class SignupViewController: NBParentViewController, UIPickerViewDelegate, UIPick
     let dateFormatter = DateFormatter()
     let genderPickerData = ["ذكر", "انثى"]
     
+    var isAcceptTerms = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         signupViewModel = SignupViewModel.init(viewController: self)
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.hidesBackButton = false
     }
     
     func setupView(){
@@ -111,6 +125,8 @@ class SignupViewController: NBParentViewController, UIPickerViewDelegate, UIPick
             showAlert(withTitle: "", andMessage: "تأكيد الرقم السري غير صحيح")
         }else if !signupViewModel.isPasswordAndConfirmPasswordIdentical{
             showAlert(withTitle: "", andMessage: "يجب ان يكون الرقم السري و تأكيد الرقم السري متشابهان")
+        }else if !isAcceptTerms{
+            showAlert(withTitle: "", andMessage: "الرجاء قبول الشروط والأحكام")
         }else{
             sender.isEnabled = false
             let mobileNumber = "\(countryCodeLabel.text ?? "")\(signupViewModel.mobileNumber.value)"
@@ -119,7 +135,26 @@ class SignupViewController: NBParentViewController, UIPickerViewDelegate, UIPick
     }
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func termsAndConditionsButtonClicked(_ sender: UIButton) {
+        goToTremsAndConditions()
+    }
+    
+    @IBAction func acceptTandCBtnClicked(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            isAcceptTerms = true
+            sender.backgroundColor = UIColor(red: 169.0/255.0, green: 147.0/255.0, blue: 85.0/255.0, alpha: 1.0)
+            sender.tag = 1
+        case 1:
+            isAcceptTerms = false
+            sender.backgroundColor = UIColor(red: 194.0/255.0, green: 192.0/255.0, blue: 196.0/255.0, alpha: 1.0)
+            sender.tag = 0
+        default:
+            break
+        }
     }
     
     @IBAction func showPasswordButtonClicked(_ sender: UIButton) {

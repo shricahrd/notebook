@@ -38,7 +38,7 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupDataPresentationViews()
         homeVM = HomeViewModel(viewController: self)
         bookQouteImage.roundCorners(withRadius: 6)
@@ -85,7 +85,7 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
             { (row, model: AdBook, cell: FeaturedBookCollectionViewCell) in
                 cell.configureCell(withCoverImageUrl: model.cover)
                 cell.setCellShadow()
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
         
         featuredBooksCollectionView.rx.itemSelected.bind { [weak self] indexPath in
             if let bookDetails = self?.featuredBooksDataSourceVariable.value[indexPath.row], let bookId = bookDetails.id{
@@ -100,7 +100,7 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
             .bind(to: genresCollectionView.rx
                 .items(cellIdentifier: GenresCollectionViewCell.reusableIdentifier, cellType: GenresCollectionViewCell.self)){ (row, model: Genre, cell: GenresCollectionViewCell) in
                     cell.configureCell(withTitle: model.name ?? "")
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
         
         genresCollectionView.rx.itemSelected.bind { [weak self] indexPath in
             if let genre = self?.genresDataSourceVariable.value[indexPath.row], let genreId = genre.id{
@@ -109,7 +109,7 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
             }else{
                 self?.openSearch(withGenreId: "")
             }
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
         
         let mostReadNib = UINib(nibName: MostReadCollectionViewCell.reusableIdentifier, bundle: nil)
         mostReadCollectionView.register(mostReadNib, forCellWithReuseIdentifier: MostReadCollectionViewCell.reusableIdentifier)
@@ -124,7 +124,7 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
             if let bookDetails = self?.mostReadBooksDataSourceVariable.value[indexPath.row], let bookId = bookDetails.id{
                 self?.openBookDetails(withBook: bookDetails, bookId: bookId)
             }
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
         
         userGenresTableView.tableFooterView = UIView()
         let userGenresNib = UINib.init(nibName: UserGenreTableViewCell.reusableIdentifier, bundle: nil)
@@ -175,7 +175,7 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
             navigationController?.pushViewController(searchVC, animated: true)
         }
     }
-
+    
     func gotoBookDetails(withViewController viewController: NBParentViewController){
         navigationController?.pushViewController(viewController, animated: true)
     }

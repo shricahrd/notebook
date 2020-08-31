@@ -36,6 +36,12 @@ class ForgetPasswordConfirmationViewController: NBParentViewController {
         setupView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+        navigationItem.hidesBackButton = true
+    }
+    
     func setupView(){
         changePasswordButton.titleLabel?.font = UIFont.GulfBold(withSize: FontSize.vTiny)
         backButton.titleLabel?.font = UIFont.GulfBold(withSize: FontSize.vTiny)
