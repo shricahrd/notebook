@@ -15,6 +15,8 @@ struct HomeData : Mappable{
 	var featured : [AdBook]?
 	var genres : [Genre]?
 	var mostRead : [AdBook]?
+    var audioBooks : [AdBook]?
+    var eBooks : [AdBook]?
 	var userGenres : [UserGenre]?
     var adImage: AdImage?
 
@@ -27,6 +29,8 @@ struct HomeData : Mappable{
 		featured <- map["featured"]
 		genres <- map["genres"]
 		mostRead <- map["most_read"]
+        audioBooks <- map["audio_books"]
+        eBooks <- map["ebooks"]
 		userGenres <- map["user_genres"]
 		adImage <- map["ad"]
 	}

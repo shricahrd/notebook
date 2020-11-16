@@ -152,7 +152,7 @@ class AddressViewController: NBParentViewController, UIGestureRecognizerDelegate
         floorTextField.text = phoneNumberAndCountryCode.1
         
         areaTextField.text = address.area_name?.area_name
-        countryTextField.text = address.country_code
+        countryTextField.text = address.country_name
         addressVM.selectedAreaId = Int(address.area_id ?? "-1")
         if let code = address.country_code{
             addressVM.fetchAreas(withCountryCode: code)

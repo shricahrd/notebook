@@ -25,6 +25,7 @@
 #include <exception>
 #include <memory>
 #include <type_traits>
+#include <unordered_map>
 #include <vector>
 
 namespace realm {
@@ -35,7 +36,7 @@ namespace _impl {
 // A token which keeps an asynchronous query alive
 struct NotificationToken {
     NotificationToken() = default;
-    NotificationToken(std::shared_ptr<_impl::CollectionNotifier> notifier, size_t token);
+    NotificationToken(std::shared_ptr<_impl::CollectionNotifier> notifier, uint64_t token);
     ~NotificationToken();
 
     NotificationToken(NotificationToken&&);
@@ -48,7 +49,7 @@ struct NotificationToken {
 
 private:
     util::AtomicSharedPtr<_impl::CollectionNotifier> m_notifier;
-    size_t m_token;
+    uint64_t m_token;
 };
 
 struct CollectionChangeSet {
@@ -86,7 +87,7 @@ struct CollectionChangeSet {
     std::vector<Move> moves;
 
     // Per-column version of `modifications`
-    std::vector<IndexSet> columns;
+    std::unordered_map<int64_t, IndexSet> columns;
 
     bool empty() const noexcept
     {
@@ -126,6 +127,7 @@ public:
 
 private:
     struct Base {
+        virtual ~Base() {}
         virtual void before(CollectionChangeSet const&)=0;
         virtual void after(CollectionChangeSet const&)=0;
         virtual void error(std::exception_ptr)=0;

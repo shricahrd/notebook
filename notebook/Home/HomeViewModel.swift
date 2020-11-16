@@ -34,7 +34,12 @@ class HomeViewModel: NBParentViewModel {
                     self?.homeViewController?.genresDataSourceVariable.value.append(defaultItem)
                 }
                 
-                self?.homeViewController?.mostReadBooksDataSourceVariable.value = self?.filterMostReadWithListenPrice(mostReadArray: data.data?.mostRead) ?? []
+                //self?.homeViewController?.mostReadBooksDataSourceVariable.value = self?.filterMostReadWithListenPrice(mostReadArray: data.data?.mostRead) ?? []
+                self?.homeViewController?.mostReadBooksDataSourceVariable.value = data.data?.mostRead ?? []
+                
+                self?.homeViewController?.audioBooksDataSourceVariable.value = data.data?.audioBooks ?? []
+                                
+                self?.homeViewController?.eBooksDataSourceVariable.value = data.data?.eBooks ?? []
                 
                 self?.homeViewController?.userGenresDataSourceVariable.value = data.data?.userGenres ?? []
                 if let imageObject = data.data?.adImage{

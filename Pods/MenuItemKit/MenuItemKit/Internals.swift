@@ -15,34 +15,22 @@ let blockIdentifierPrefix = "_menuitemkit_block_"
 func setNewIMPWithBlock<T>(_ block: T, forSelector selector: Selector, toClass klass: AnyClass) {
   let method = class_getInstanceMethod(klass, selector)
   let imp = imp_implementationWithBlock(unsafeBitCast(block, to: AnyObject.self))
-    if !class_addMethod(klass, selector, imp, method_getTypeEncoding((method ?? nil)!)) {
-        method_setImplementation((method ?? nil)!, imp)
+  if !class_addMethod(klass, selector, imp, method_getTypeEncoding(method!)) {
+    method_setImplementation(method!, imp)
   }
 }
 
-func isMenuItemKitSelector(_ str: String) -> Bool {
-  return str.hasPrefix(blockIdentifierPrefix)
-}
-
-func isMenuItemKitSelector(_ sel: Selector) -> Bool {
-  return isMenuItemKitSelector(NSStringFromSelector(sel))
-}
-
-extension NSObject {
-
-  @nonobjc
+@nonobjc extension NSObject {
   var imageBox: Box<UIImage?> {
     let key: StaticString = #function
     return associatedBoxForKey(key, initialValue: nil)
   }
 
-  @nonobjc
   var actionBox: Box<MenuItemAction?> {
     let key: StaticString = #function
     return associatedBoxForKey(key, initialValue: nil)
   }
 
-  @nonobjc
   func associatedBoxForKey<T>(_ key: StaticString, initialValue: @autoclosure () -> T) -> Box<T> {
     guard let box = objc_getAssociatedObject(self, key.utf8Start) as? Box<T> else {
       let box = Box(initialValue())
@@ -52,16 +40,13 @@ extension NSObject {
 
     return box
   }
-
 }
 
 // MARK: Box wrapper
 final class Box<T> {
-
   var value: T
 
   init(_ val: T) {
     value = val
   }
-  
 }

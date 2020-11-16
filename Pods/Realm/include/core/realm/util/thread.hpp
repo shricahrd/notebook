@@ -22,7 +22,10 @@
 #include <exception>
 
 #ifdef _WIN32
-#include <win32/pthread/pthread.h>
+#include <thread>
+#include <condition_variable> // for windows non-interprocess condvars we use std::condition_variable
+#include <Windows.h>
+#include <process.h> // _getpid()
 #else
 #include <pthread.h>
 #endif
@@ -62,7 +65,7 @@ public:
     Thread(const Thread&) = delete;
     Thread& operator=(const Thread&) = delete;
 
-    Thread(Thread&&);
+    Thread(Thread&&) noexcept;
 
     /// This method is an extension of the API provided by
     /// std::thread. This method exists because proper move semantics
@@ -86,12 +89,16 @@ public:
     // If supported by the platform, this function assigns the name of the
     // calling thread to \a name, and returns true, otherwise it does nothing
     // and returns false.
-    static bool get_name(std::string& name);
+    static bool get_name(std::string& name) noexcept;
 
 private:
-    pthread_t m_id;
-    bool m_joinable;
 
+#ifdef _WIN32
+    std::thread m_std_thread;
+#else    
+    pthread_t m_id;
+#endif
+    bool m_joinable;
     typedef void* (*entry_func_type)(void*);
 
     void start(entry_func_type, void* arg);
@@ -127,13 +134,20 @@ public:
 
     friend class LockGuard;
     friend class UniqueLock;
+    friend class InterprocessCondVar;
 
     void lock() noexcept;
     bool try_lock() noexcept;
     void unlock() noexcept;
 
 protected:
+#ifdef _WIN32
+    // Used for non-process-shared mutex. We only know at runtime whether or not to use it, depending on if we call
+    // Mutex::Mutex(process_shared_tag)
+    CRITICAL_SECTION m_critical_section;
+#else
     pthread_mutex_t m_impl = PTHREAD_MUTEX_INITIALIZER;
+#endif
 
     struct no_init_tag {
     };
@@ -149,7 +163,9 @@ protected:
     REALM_NORETURN static void destroy_failed(int) noexcept;
     REALM_NORETURN static void lock_failed(int) noexcept;
 
+private:
     friend class CondVar;
+    friend class RobustMutex;
 };
 
 
@@ -346,7 +362,11 @@ public:
     void notify_all() noexcept;
 
 private:
+#ifdef _WIN32
+    CONDITION_VARIABLE m_condvar = CONDITION_VARIABLE_INIT;
+#else
     pthread_cond_t m_impl;
+#endif
 
     REALM_NORETURN static void init_failed(int);
     REALM_NORETURN static void attr_init_failed(int);
@@ -354,6 +374,42 @@ private:
     void handle_wait_error(int error);
 };
 
+
+class RaceDetector {
+    std::atomic<bool> busy;
+
+public:
+    RaceDetector()
+    {
+        busy.store(false);
+    }
+    void enter()
+    {
+        bool already_busy = busy.exchange(true, std::memory_order_acq_rel);
+        if (already_busy)
+            throw std::runtime_error("Race detected - critical section busy on entry");
+    }
+    void leave()
+    {
+        busy.store(false, std::memory_order_release);
+    }
+    friend class CriticalSection;
+};
+
+class CriticalSection {
+    RaceDetector& rd;
+
+public:
+    CriticalSection(RaceDetector& race)
+        : rd(race)
+    {
+        rd.enter();
+    }
+    ~CriticalSection()
+    {
+        rd.leave();
+    }
+};
 
 // Implementation:
 
@@ -371,11 +427,13 @@ inline Thread::Thread(F func)
     func2.release();
 }
 
-inline Thread::Thread(Thread&& thread)
+inline Thread::Thread(Thread&& thread) noexcept
 {
+#ifndef _WIN32
     m_id = thread.m_id;
     m_joinable = thread.m_joinable;
     thread.m_joinable = false;
+#endif
 }
 
 template <class F>
@@ -402,10 +460,14 @@ inline bool Thread::joinable() noexcept
 
 inline void Thread::start(entry_func_type entry_func, void* arg)
 {
+#ifdef _WIN32
+    m_std_thread = std::thread(entry_func, arg);
+#else
     const pthread_attr_t* attr = nullptr; // Use default thread attributes
     int r = pthread_create(&m_id, attr, entry_func, arg);
     if (REALM_UNLIKELY(r != 0))
         create_failed(r); // Throws
+#endif
 }
 
 template <class F>
@@ -435,28 +497,43 @@ inline Mutex::Mutex(process_shared_tag)
 
 inline Mutex::~Mutex() noexcept
 {
+#ifndef _WIN32
     int r = pthread_mutex_destroy(&m_impl);
     if (REALM_UNLIKELY(r != 0))
         destroy_failed(r);
+#else
+    DeleteCriticalSection(&m_critical_section);
+#endif
 }
 
 inline void Mutex::init_as_regular()
 {
+#ifndef _WIN32
     int r = pthread_mutex_init(&m_impl, 0);
     if (REALM_UNLIKELY(r != 0))
         init_failed(r);
+#else
+    InitializeCriticalSection(&m_critical_section);
+#endif
 }
 
 inline void Mutex::lock() noexcept
 {
+#ifdef _WIN32
+    EnterCriticalSection(&m_critical_section);
+#else
     int r = pthread_mutex_lock(&m_impl);
     if (REALM_LIKELY(r == 0))
         return;
     lock_failed(r);
+#endif
 }
 
 inline bool Mutex::try_lock() noexcept
 {
+#ifdef _WIN32
+    return TryEnterCriticalSection(&m_critical_section);
+#else
     int r = pthread_mutex_trylock(&m_impl);
     if (r == EBUSY) {
         return false;
@@ -465,12 +542,17 @@ inline bool Mutex::try_lock() noexcept
         return true;
     }
     lock_failed(r);
+#endif
 }
 
 inline void Mutex::unlock() noexcept
 {
+#ifdef _WIN32
+    LeaveCriticalSection(&m_critical_section);
+#else
     int r = pthread_mutex_unlock(&m_impl);
     REALM_ASSERT(r == 0);
+#endif
 }
 
 
@@ -605,23 +687,31 @@ inline void RobustMutex::unlock() noexcept
 
 inline CondVar::CondVar()
 {
+#ifndef _WIN32
     int r = pthread_cond_init(&m_impl, 0);
     if (REALM_UNLIKELY(r != 0))
         init_failed(r);
+#endif
 }
 
 inline CondVar::~CondVar() noexcept
 {
+#ifndef _WIN32
     int r = pthread_cond_destroy(&m_impl);
     if (REALM_UNLIKELY(r != 0))
         destroy_failed(r);
+#endif
 }
 
 inline void CondVar::wait(LockGuard& l) noexcept
 {
+#ifdef _WIN32
+    SleepConditionVariableCS(&m_condvar, &l.m_mutex.m_critical_section, INFINITE);
+#else
     int r = pthread_cond_wait(&m_impl, &l.m_mutex.m_impl);
     if (REALM_UNLIKELY(r != 0))
         REALM_TERMINATE("pthread_cond_wait() failed");
+#endif
 }
 
 template <class Func>
@@ -630,12 +720,29 @@ inline void CondVar::wait(RobustMutex& m, Func recover_func, const struct timesp
     int r;
 
     if (!tp) {
+#ifdef _WIN32
+        if (!SleepConditionVariableCS(&m_condvar, &m.m_critical_section, INFINITE))
+            r = GetLastError();
+        else
+            r = 0;
+#else
         r = pthread_cond_wait(&m_impl, &m.m_impl);
+#endif
     }
     else {
+#ifdef _WIN32
+        if (!SleepConditionVariableCS(&m_condvar, &m.m_critical_section, tp->tv_sec / 1000)) {
+            r = GetLastError();
+            if (r == ERROR_TIMEOUT)
+                return;
+        } else {
+            r = 0
+        }
+#else
         r = pthread_cond_timedwait(&m_impl, &m.m_impl, tp);
         if (r == ETIMEDOUT)
             return;
+#endif
     }
 
     if (REALM_LIKELY(r == 0))
@@ -663,14 +770,41 @@ inline void CondVar::wait(RobustMutex& m, Func recover_func, const struct timesp
 
 inline void CondVar::notify() noexcept
 {
+#ifdef _WIN32
+    WakeConditionVariable(&m_condvar);
+#else
     int r = pthread_cond_signal(&m_impl);
     REALM_ASSERT(r == 0);
+#endif
 }
 
 inline void CondVar::notify_all() noexcept
 {
+#ifdef _WIN32
+    WakeAllConditionVariable(&m_condvar);
+#else
     int r = pthread_cond_broadcast(&m_impl);
     REALM_ASSERT(r == 0);
+#endif
+}
+
+// helpers which can ensure atomic access to memory which has not itself been declared atomic.
+// This can be used to e.g. ensure atomic access to members of a vector. Vectors does not
+// fully allow atomic members because operations on vector may relocate the underlying memory.
+// use with care!
+template <typename T>
+T load_atomic(T& t_ref, std::memory_order order)
+{
+    std::atomic<T>* t_ptr = reinterpret_cast<std::atomic<T>*>(&t_ref);
+    T t = atomic_load_explicit(t_ptr, order);
+    return t;
+}
+
+template <typename T>
+void store_atomic(T& t_ref, T value, std::memory_order order)
+{
+    std::atomic<T>* t_ptr = reinterpret_cast<std::atomic<T>*>(&t_ref);
+    atomic_store_explicit(t_ptr, value, order);
 }
 
 

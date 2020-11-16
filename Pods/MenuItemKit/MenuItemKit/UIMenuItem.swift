@@ -10,7 +10,6 @@ import UIKit
 import ObjectiveC.runtime
 
 public extension UIMenuItem {
-
   @objc(mik_initWithTitle:image:action:)
   convenience init(title: String, image: UIImage?, action: @escaping MenuItemAction) {
     let title = image != nil ? title + imageItemIdetifier : title
@@ -23,14 +22,16 @@ public extension UIMenuItem {
   convenience init(title: String, action: @escaping MenuItemAction) {
     self.init(title: title, image: nil, action: action)
   }
-  
+
+  @objc(mik_isMenuItemKitSelector:)
+  static func isMenuItemKitSelector(_ sel: Selector) -> Bool {
+    return NSStringFromSelector(sel).hasPrefix(blockIdentifierPrefix)
+  }
 }
 
 // MARK: NSUUID
 private extension UUID {
-  
   static var stripedString: String {
     return UUID().uuidString.replacingOccurrences(of: "-", with: "_")
   }
-  
 }

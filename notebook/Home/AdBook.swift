@@ -59,6 +59,10 @@ struct AdBook : Mappable{
     
     var purchaseTypeMapped = PurchaseType.none
     
+    var tracks : [BookTrack]?
+    
+    var previewLink: String?
+    
     init?(map: Map){}
     init(){}
 
@@ -92,6 +96,10 @@ struct AdBook : Mappable{
         readCode <- map["read_code"]
         listenCode <- map["listen_code"]
         shareLink <- map["share_link"]
+        
+        tracks <- map["tracks"]
+        
+        previewLink <- map["preview_link"]
 	}
 
 }

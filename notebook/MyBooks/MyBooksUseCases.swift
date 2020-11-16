@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class MyBooksUseCases {
-    func fetchUserBooks(success: @escaping Success, failure: @escaping Failure) {
-        SharedClient.sharedInstance.start(request: MyBooksRequests.fetchUserBooks, model: MyBooksResponseModel(), success: { data in
+    func fetchUserBooks(paginator: Map?, success: @escaping Success, failure: @escaping Failure) {
+        SharedClient.sharedInstance.start(request: MyBooksRequests.fetchUserBooks(paginator: paginator), model: MyBooksResponseModel(), success: { data in
             success(data)
         }, failure: { error in
             failure(error)

@@ -27,6 +27,8 @@ class AuthorViewController: NBParentViewController, UIGestureRecognizerDelegate 
     var authorViewModel: AuthorViewModel?
     var authorDetailsVariable = Variable<Author>(Author())
     
+    var authorShareLink: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,7 @@ class AuthorViewController: NBParentViewController, UIGestureRecognizerDelegate 
         authorImage.roundCorners(withRadius: authorImage.bounds.height / 2)
         authorBioContainerView.roundCorners(withRadius: 8)
         pathImageView.image = pathImageView.image?.withRenderingMode(.alwaysTemplate)
+        
     }
     
     func setupDataPresentationViews(){
@@ -83,6 +86,10 @@ class AuthorViewController: NBParentViewController, UIGestureRecognizerDelegate 
         title = author.name
         authoBioLabel.text = author.bio
         tableTitleLabel.text = "كتب \(author.name ?? "")"
+        
+        if let authorShareLink = author.authorShareLink {
+            self.authorShareLink = authorShareLink
+        }
     }
     
     func favouriteBookHandlerOfCell(withIndexPath indexPath: IndexPath){
@@ -102,6 +109,16 @@ class AuthorViewController: NBParentViewController, UIGestureRecognizerDelegate 
             bookDetailsVC.bookId = bookIdString
             bookDetailsVC.bookDetails = book
             navigationController?.pushViewController(bookDetailsVC, animated: true)
+        }
+    }
+    
+    @IBAction func shareButtonClicked(_ sender: UIButton) {
+        let appURL = "\(self.authorShareLink ?? "")"
+        if let myWebsite = URL(string: appURL) {
+            let objectsToShare = [myWebsite]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = view
+            self.present(activityVC, animated: true, completion: nil)
         }
     }
 }

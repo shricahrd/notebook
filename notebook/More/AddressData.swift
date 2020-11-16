@@ -22,4 +22,5 @@ struct AddressData : Codable{
     var id : Int?
     var street : String?
     var user_id: String?
+    var country_name: String?
 }

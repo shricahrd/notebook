@@ -25,10 +25,21 @@
 #include <cstdio>
 #include <algorithm>
 #include <functional>
+#include <time.h>
 
-#ifdef _MSC_VER
+#ifdef _WIN32
+
+#include <WinSock2.h>
 #include <intrin.h>
+#include <BaseTsd.h>
+
+#if !defined(_SSIZE_T_) && !defined(_SSIZE_T_DEFINED)
+typedef SSIZE_T ssize_t;
+#define _SSIZE_T_
+#define _SSIZE_T_DEFINED
 #endif
+
+#endif // _WIN32
 
 #include <realm/util/features.h>
 #include <realm/util/assert.hpp>
@@ -56,7 +67,7 @@
 #endif
 
 
-#if defined(REALM_PTR_64) && defined(REALM_X86_OR_X64)
+#if defined(REALM_PTR_64) && defined(REALM_X86_OR_X64) && !REALM_WATCHOS
 #define REALM_COMPILER_SSE // Compiler supports SSE 4.2 through __builtin_ accessors or back-end assembler
 #define REALM_COMPILER_AVX
 #endif
@@ -115,6 +126,12 @@ size_t round_up(size_t p, size_t align);
 size_t round_down(size_t p, size_t align);
 void millisleep(unsigned long milliseconds);
 
+#ifdef _WIN32
+int gettimeofday(struct timeval * tp, struct timezone * tzp);
+#endif
+
+int64_t platform_timegm(tm time);
+
 #ifdef REALM_SLAB_ALLOC_TUNE
 void process_mem_usage(double& vm_usage, double& resident_set);
 #endif
@@ -122,6 +139,20 @@ void process_mem_usage(double& vm_usage, double& resident_set);
 int fast_popcount32(int32_t x);
 int fast_popcount64(int64_t x);
 uint64_t fastrand(uint64_t max = 0xffffffffffffffffULL, bool is_seed = false);
+
+// Class to be used when a private generator is wanted.
+// Object of this class should not be shared between threads.
+class FastRand {
+public:
+    FastRand(uint64_t seed = 1)
+        : m_state(seed)
+    {
+    }
+    uint64_t operator()(uint64_t max = uint64_t(-1));
+
+private:
+    uint64_t m_state;
+};
 
 // log2 - returns -1 if x==0, otherwise log2(x)
 inline int log2(size_t x)
@@ -197,7 +228,7 @@ enum IndexMethod {
 struct InternalFindResult {
     // Reference to a IntegerColumn containing result rows, or a single row
     // value if the result is FindRes_single.
-    size_t payload;
+    int64_t payload;
     // Offset into the result column to start at.
     size_t start_ndx;
     // Offset index in the result column to end at.
@@ -282,6 +313,13 @@ struct PlacementDelete {
         v->~T();
     }
 };
+
+#ifdef _WIN32
+typedef void* FileDesc;
+#else
+typedef int FileDesc;
+#endif
+
 
 } // namespace realm
 

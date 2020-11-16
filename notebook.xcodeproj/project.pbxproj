@@ -133,7 +133,6 @@
 		3AF2570722456B3400A979E2 /* BookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF2570622456B3400A979E2 /* BookTableViewCell.xib */; };
 		3AF2570922456B4A00A979E2 /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2570822456B4A00A979E2 /* BookTableViewCell.swift */; };
 		3AF25717224622B400A979E2 /* MyBooks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF25716224622B400A979E2 /* MyBooks.storyboard */; };
-		3AF257192246255F00A979E2 /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF257182246255F00A979E2 /* MyBooksViewController.swift */; };
 		3AF2571B2246275400A979E2 /* MyBooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2571A2246275400A979E2 /* MyBooksViewModel.swift */; };
 		3AF2571D2246276100A979E2 /* MyBooksUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2571C2246276100A979E2 /* MyBooksUseCases.swift */; };
 		3AF2571F2246276E00A979E2 /* MyBooksRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2571E2246276E00A979E2 /* MyBooksRequests.swift */; };
@@ -158,7 +157,11 @@
 		3AF5A5DD22321C080018D2E7 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5A5DC22321C080018D2E7 /* LocalStore.swift */; };
 		3AF5A5E1223221800018D2E7 /* Launcher.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF5A5E0223221800018D2E7 /* Launcher.storyboard */; };
 		3AF5A5E32232219E0018D2E7 /* LauncherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF5A5E22232219E0018D2E7 /* LauncherViewController.swift */; };
+		5274DD3D251149D2008F1F2B /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF257182246255F00A979E2 /* MyBooksViewController.swift */; };
 		5289916324F3020A00612B66 /* AboutDevelopersWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5289916224F3020A00612B66 /* AboutDevelopersWebViewController.swift */; };
+		52C099AC2511E272009167C6 /* BookTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C099AB2511E272009167C6 /* BookTracks.swift */; };
+		52FD23C325129CA300D82B47 /* TracksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52FD23C225129CA300D82B47 /* TracksCollectionViewCell.xib */; };
+		52FD23C72512A18300D82B47 /* TracksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FD23C62512A18300D82B47 /* TracksCollectionViewCell.swift */; };
 		9C0A14BA22E0C20800B849CA /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0A14B922E0C20800B849CA /* Connectivity.swift */; };
 		9C2ED70C22E5AE04001F8DF7 /* MyBookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2ED70A22E5AE04001F8DF7 /* MyBookTableViewCell.swift */; };
 		9C2ED70D22E5AE04001F8DF7 /* MyBookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C2ED70B22E5AE04001F8DF7 /* MyBookTableViewCell.xib */; };
@@ -331,6 +334,9 @@
 		3AF5A5E0223221800018D2E7 /* Launcher.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launcher.storyboard; sourceTree = "<group>"; };
 		3AF5A5E22232219E0018D2E7 /* LauncherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherViewController.swift; sourceTree = "<group>"; };
 		5289916224F3020A00612B66 /* AboutDevelopersWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDevelopersWebViewController.swift; sourceTree = "<group>"; };
+		52C099AB2511E272009167C6 /* BookTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTracks.swift; sourceTree = "<group>"; };
+		52FD23C225129CA300D82B47 /* TracksCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TracksCollectionViewCell.xib; sourceTree = "<group>"; };
+		52FD23C62512A18300D82B47 /* TracksCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksCollectionViewCell.swift; sourceTree = "<group>"; };
 		73D09398B3FEA0220EEB2EB1 /* Pods-notebook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-notebook.debug.xcconfig"; path = "Target Support Files/Pods-notebook/Pods-notebook.debug.xcconfig"; sourceTree = "<group>"; };
 		75B9CADEE9021A36A83C6D4A /* Pods_notebook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_notebook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0A14B922E0C20800B849CA /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
@@ -578,6 +584,7 @@
 				3A625C022215379F003A3422 /* Quote.swift */,
 				3A625C032215379F003A3422 /* UserGenre.swift */,
 				3A06E963224D911400ED0899 /* AdImage.swift */,
+				52C099AB2511E272009167C6 /* BookTracks.swift */,
 			);
 			name = HomeModel;
 			sourceTree = "<group>";
@@ -727,6 +734,7 @@
 				3A6394FF2220F96F00C50D20 /* UserGenreTableViewCell.xib */,
 				3A52E05B223F4F700041EFBE /* BookQuoteTableViewCell.xib */,
 				3A527BA622542DB000D1F9E8 /* CartTableViewCell.xib */,
+				52FD23C225129CA300D82B47 /* TracksCollectionViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -758,6 +766,7 @@
 		3A8CFF82220E6BB3003E8814 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				52FD23C62512A18300D82B47 /* TracksCollectionViewCell.swift */,
 				3A625C1722153B8B003A3422 /* HomeViewController.swift */,
 				3A13A26D221A191E0023E02B /* FeaturedBookCollectionViewCell.swift */,
 				3A13A271221A20910023E02B /* GenresCollectionViewCell.swift */,
@@ -1178,6 +1187,7 @@
 				3AF2573D2246C60A00A979E2 /* More.storyboard in Resources */,
 				3AF5A5E1223221800018D2E7 /* Launcher.storyboard in Resources */,
 				3A1706F221FB9F68005C1C81 /* LaunchScreen.storyboard in Resources */,
+				52FD23C325129CA300D82B47 /* TracksCollectionViewCell.xib in Resources */,
 				3A6394F82220F25D00C50D20 /* MostReadCollectionViewCell.xib in Resources */,
 				9CD26E2C22D26B9C0060271A /* LogoSplash.gif in Resources */,
 				3A13A26C221A18A50023E02B /* FeaturedBookCollectionViewCell.xib in Resources */,
@@ -1271,6 +1281,7 @@
 				3A3365822243716300CA5239 /* PaginatorMeta.swift in Sources */,
 				3A8E1B32222F1BC5005264C8 /* LoginUseCases.swift in Sources */,
 				3AF256F82244DB5C00A979E2 /* LoadingIndicatorCustomView.swift in Sources */,
+				52C099AC2511E272009167C6 /* BookTracks.swift in Sources */,
 				3A235D5D2212308900E9F71B /* UIColor+NB.swift in Sources */,
 				3AA27D6F225AB68D005FFD4F /* PaymentWebViewViewController.swift in Sources */,
 				3A06E95E224D86BA00ED0899 /* AboutDevelopersViewController.swift in Sources */,
@@ -1290,7 +1301,6 @@
 				3AF2571F2246276E00A979E2 /* MyBooksRequests.swift in Sources */,
 				3AA27D68225AA609005FFD4F /* PurchaseBookRequestPayload.swift in Sources */,
 				3A1706EA21FB9F67005C1C81 /* NBParentViewController.swift in Sources */,
-				3AF257192246255F00A979E2 /* MyBooksViewController.swift in Sources */,
 				3AF257422246D8B200A979E2 /* LogoutViewController.swift in Sources */,
 				3AA8621622502EAE007E160E /* ForgetPasswordConfirmationViewController.swift in Sources */,
 				1ABD57CC2427D35700C5C854 /* CountryCode3.swift in Sources */,
@@ -1347,6 +1357,7 @@
 				3A13A274221A22460023E02B /* UIView+NB.swift in Sources */,
 				3AD56081224ED3CC005E827F /* ChangePasswordViewController.swift in Sources */,
 				3A9A7DA022497FC7002084FB /* SignupViewModel.swift in Sources */,
+				52FD23C72512A18300D82B47 /* TracksCollectionViewCell.swift in Sources */,
 				3A9989C3228CBFFC00EC7921 /* DeviceInfoRequestPayload.swift in Sources */,
 				3A625C1322153942003A3422 /* HomeRequests.swift in Sources */,
 				9C0A14BA22E0C20800B849CA /* Connectivity.swift in Sources */,
@@ -1383,6 +1394,7 @@
 				3AF2574E2246DD1900A979E2 /* LogoutModel.swift in Sources */,
 				3A532D0D224AD262003BD959 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				3AF2570522451CFE00A979E2 /* GenresResponseModel.swift in Sources */,
+				5274DD3D251149D2008F1F2B /* MyBooksViewController.swift in Sources */,
 				3A625C0B2215379F003A3422 /* Quote.swift in Sources */,
 				3A20420A21FFE836002550D4 /* APIClient.swift in Sources */,
 				3AA8621822503008007E160E /* ForgetPasswordConfirmationViewModel.swift in Sources */,
@@ -1542,10 +1554,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 73D09398B3FEA0220EEB2EB1 /* Pods-notebook.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = notebook/notebook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 5XHMD2CMM5;
 				INFOPLIST_FILE = notebook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1553,8 +1567,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.clueapps.notebookapp;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.notebook.me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1566,10 +1580,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C542404204274DD85F2024CC /* Pods-notebook.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = notebook/notebook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 1.0.3;
 				DEVELOPMENT_TEAM = 5XHMD2CMM5;
 				INFOPLIST_FILE = notebook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1577,8 +1593,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.clueapps.notebookapp;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.notebook.me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

@@ -8,6 +8,8 @@ import IQKeyboardManager
 import Firebase
 import AVFoundation
 import FirebaseDynamicLinks
+import FirebaseMessaging
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -23,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
         try? AVAudioSession.sharedInstance().setActive(true)
+        
         return true
     }
     
@@ -163,13 +166,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
-
-
-// TODO:
-// 1. test no internet in home
-// 2. bookQuate click.
-// 3. edit and view address with country code.
-
-// TO BE DONE:
-// 1. El goz2 eli et7at geded fl books player.
-// 2. book details bugs.

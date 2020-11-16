@@ -22,7 +22,12 @@ class NBParentViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         do {
-//            NBParentViewController.realm = try Realm()
+            let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
+                //Leave the block empty
+                if (oldSchemaVersion < 1) {}
+            }
+            Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 1, migrationBlock: migrationBlock)
+            NBParentViewController.realm = try Realm()
         }catch let err {
             showAlert(withTitle: "", andMessage: "\(err.localizedDescription)")
         }
@@ -32,7 +37,10 @@ class NBParentViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "موافق", style: .cancel, handler: completion)
         alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func showLoadingView(){
@@ -156,7 +164,8 @@ class NBParentViewController: UIViewController {
                     self.hideLoadingView()
                     completion(filePath)
                 }
-            } catch {
+            } catch let error {
+                print(error)
                 print("an error happened while downloading or saving the file")
                 DispatchQueue.main.async {
                     self.hideLoadingView()

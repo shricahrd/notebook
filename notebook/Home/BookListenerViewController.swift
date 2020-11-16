@@ -6,18 +6,25 @@
 //  Copyright © 2019 clueapps. All rights reserved.
 //
 
+//import Foundation
+//import SwiftAudioPlayer
+
 import UIKit
 import AVFoundation
 import SDWebImage
 import MediaPlayer
+import RxSwift
+import RxCocoa
 
-class BookListenerViewController: NBParentViewController, UIGestureRecognizerDelegate {
-
+class BookListenerViewController: NBParentViewController, UIGestureRecognizerDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, AVAssetResourceLoaderDelegate {
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var startFromLabel: UILabel!
     @IBOutlet weak var toEndLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var backgroundImage: UIImageView!
+    
+    @IBOutlet weak var tracksCollectionView: UICollectionView!
     
     var audioPlayer: AVAudioPlayer?
     var timer: Timer?
@@ -25,13 +32,22 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
     var bookName = ""
     var link = ""
     
+    var selectedUrl: String = "" {
+        didSet {
+            self.link = self.selectedUrl
+        }
+    }
+    
     var contentURL: URL?
     var readyToOpen = false
     var newAudioWillBeLoaded = false
     
+    var tracksArr: [BookTrack]? = nil
+    var tracksDataSourceVariable = Variable<[BookTrack]>([])
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -41,14 +57,20 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
         navigationController?.isNavigationBarHidden = true
         tabBarController?.tabBar.isHidden = true
         
-        if newAudioWillBeLoaded {
+        //if newAudioWillBeLoaded {
             stopPlayer()
             audioPlayer = nil
             
             let urlString = coverImageLink.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
             backgroundImage.sd_setImage(with: URL(string: urlString ?? ""), placeholderImage: #imageLiteral(resourceName: "notebook_place_holder"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
             startupLogic()
+        
+        setupDataPresentationViews()
+        if let tracksArr = tracksArr {
+            tracksDataSourceVariable.value = tracksArr
         }
+            
+        //}
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,15 +80,67 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
     }
     
     func startupLogic(){
+        checkBookTrackExists(link: self.link)
+    }
+    
+    func setupDataPresentationViews(){
+        
+        if tracksDataSourceVariable.value.count > 0 {
+            tracksDataSourceVariable.value.removeAll()
+            tracksCollectionView.isHidden = true
+            tracksCollectionView.delegate = nil
+            tracksCollectionView.dataSource = nil
+        }else{
+            tracksCollectionView.delegate = nil
+            tracksCollectionView.dataSource = nil
+            tracksCollectionView.isHidden = false
+        }
+        
+        tracksCollectionView.backgroundColor = .black
+        let tracksNib = UINib(nibName: TracksCollectionViewCell.reusableIdentifier, bundle: nil)
+        tracksCollectionView.register(tracksNib, forCellWithReuseIdentifier: TracksCollectionViewCell.reusableIdentifier)
+        tracksDataSourceVariable.asObservable()
+            .bind(to: tracksCollectionView.rx
+                .items(cellIdentifier: TracksCollectionViewCell.reusableIdentifier, cellType: TracksCollectionViewCell.self)){ (row, model: BookTrack, cell: TracksCollectionViewCell) in
+                    
+                    print("tracksDataSourceVariable row :- \(row)")
+                    
+                    cell.trackBtn.tag = row
+                    cell.configureCell(withTrack: model.trackName ?? "")
+                    cell.trackBtn.addTarget(self, action: #selector(self.startPalyFromTrackBtn(sender:)), for: .touchUpInside)
+                    
+        }.disposed(by: disposeBag)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == tracksCollectionView {
+            return CGSize.init(width: 100.0 , height: 50.0)
+        }
+        return CGSize.zero
+    }
+    
+    func checkBookTrackExists(link: String) {
         if !link.isEmpty{
-            checkBookFileExists(withLink: link){ [weak self] downloadedURL in
-                guard let self = self else{
-                    return
-                }
-                self.readyToOpen = true
-                self.contentURL = downloadedURL
-                self.play(url: downloadedURL)
+            if let url = URL(string: link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? "") {
+                streamingAudio(url: url)
+            }else{
+                showAlert(withTitle: "عفوا", andMessage: "حدث خطأ أثناء فتح الكتاب", completion: { action in
+                    self.navigationController?.popViewController(animated: true)
+                })
             }
+            
+            /*
+             checkBookFileExists(withLink: link){ [weak self] downloadedURL in
+             guard let self = self else{
+             return
+             }
+             self.readyToOpen = true
+             self.contentURL = downloadedURL
+             //self.play(url: downloadedURL)
+             }
+             */
+            
         }else{
             showAlert(withTitle: "عفوا", andMessage: "حدث خطأ أثناء فتح الكتاب", completion: { action in
                 self.navigationController?.popViewController(animated: true)
@@ -74,27 +148,90 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
         }
     }
     
+    func streamingAudio(url: URL) {
+        guard Connectivity.isConnectedToInternet else{
+            let message = "يجب فتح الكتاب مرة واحدة على الأقل مع انترنت"
+            self.showAlert(withTitle: "عفوا", andMessage: message, completion: { action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            return
+        }
+        
+        self.showLoadingView()
+        var downloadTask:URLSessionDownloadTask
+        downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { [weak self](URL, response, error) -> Void in
+            self?.hideLoadingView()
+            if let url = URL {
+                 self?.play(url: url)
+            }
+        })
+        downloadTask.resume()
+    }
     
-
+    func createTrackLinks() {
+        
+        if let tracks = tracksArr {
+            var row: Int = 0
+            row = tracks.count % 3
+            for (index, track) in tracks.enumerated() {
+                let trackButton = UIButton(type: .custom)
+                trackButton.tag = index
+                trackButton.frame = CGRect(x: 100.0 * Double(index), y: Double(row) * 110.0, width: 100.0, height: 100.0)
+                let yourAttributes : [NSAttributedString.Key: Any] = [
+                    NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),
+                    NSAttributedString.Key.foregroundColor : UIColor.blue,
+                    NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue]
+                let trackName = track.trackName ?? "المسار"
+                let attributeString = NSMutableAttributedString(string: trackName,
+                                                                attributes: yourAttributes)
+                trackButton.setAttributedTitle(attributeString, for: .normal)
+                trackButton.addTarget(self, action: #selector(startPalyFromTrackBtn(sender:)), for: .touchUpInside)
+                self.view.addSubview(trackButton)
+                
+                row = row + 1
+            }
+        }
+    }
+    
+    @objc func startPalyFromTrackBtn(sender: UIButton) {
+        
+        if let track = tracksArr?[sender.tag] {
+            guard let trackUrl = track.trackFile else { return }
+            print(trackUrl)
+            checkBookTrackExists(link: trackUrl)
+        }
+    }
+    
+//    func startPalyFromTrackBtn(index: Int) {
+//
+//        if let track = tracksArr?[index] {
+//            guard let trackUrl = track.trackFile else { return }
+//            //self.play(url: URL(string: trackUrl) ?? nil)
+//
+//            print(trackUrl)
+//            checkBookTrackExists(link: trackUrl)
+//        }
+//    }
+    
     func play(url: URL) {
         print("playing \(url)")
         
         do {
-            
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.prepareToPlay()
             audioPlayer?.delegate = self
             audioPlayer?.play()
-            playButton.setImage(#imageLiteral(resourceName: "pause100Blue"), for: .normal)
+            
             let percentage = (audioPlayer?.currentTime ?? 0)/(audioPlayer?.duration ?? 0)
             
             DispatchQueue.main.async {
+                self.playButton.setImage(#imageLiteral(resourceName: "pause100Blue"), for: .normal)
                 self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateAudioProgressBar), userInfo: nil, repeats: true)
                 self.progressBar.setProgress(Float(percentage), animated: false)
             }
             
             setupCommandCenter(withDuration: percentage)
-        
+            
         } catch let error {
             audioPlayer = nil
             timer?.invalidate()
@@ -152,7 +289,7 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
         handleChangingInPlaybackPositionCommand(with: commandCenter)
     }
     
-/*https://medium.com/@varundudeja/showing-media-player-system-controls-on-notification-screen-in-ios-swift-4e27fbf73575 */
+    /*https://medium.com/@varundudeja/showing-media-player-system-controls-on-notification-screen-in-ios-swift-4e27fbf73575 */
     // Handle remote events
     func handleChangingInPlaybackPositionCommand(with commandCenter: MPRemoteCommandCenter ) {
         commandCenter.changePlaybackPositionCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
@@ -163,7 +300,7 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
                 if (self?.audioPlayer?.isPlaying ?? false) {
                     self?.audioPlayer?.stop()
                 }
-                    
+                
                 self?.audioPlayer?.currentTime = remoteEvent.positionTime
                 self?.audioPlayer?.play()
                 
@@ -278,7 +415,7 @@ class BookListenerViewController: NBParentViewController, UIGestureRecognizerDel
     }
 }
 
-extension BookListenerViewController: AVAudioPlayerDelegate{
+extension BookListenerViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioIsFinished()
     }

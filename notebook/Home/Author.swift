@@ -15,6 +15,7 @@ struct Author : Mappable{
 	var bio : String?
 	var id : Int?
 	var name : String?
+    var authorShareLink : String?
 
     init?(map: Map){}
     init(){}
@@ -25,6 +26,7 @@ struct Author : Mappable{
 		bio <- map["bio"]
 		id <- map["id"]
 		name <- map["name"]
+        authorShareLink <- map["author_share_link"]
 		
 	}
 }

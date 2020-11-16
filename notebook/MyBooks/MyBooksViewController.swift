@@ -9,7 +9,18 @@
 import UIKit
 import RxSwift
 import RxCocoa
-//import FolioReaderKit
+import FolioReaderKit
+
+extension MyBooksViewController: FolioReaderDelegate {
+    
+    func folioReader(_ folioReader: FolioReader, didFinishedLoading book: FRBook) {
+        
+    }
+    
+    func folioReaderDidClose(_ folioReader: FolioReader) {
+        self.readerShadView.removeFromSuperview()
+    }
+}
 
 class MyBooksViewController: NBParentViewController {
     
@@ -22,6 +33,10 @@ class MyBooksViewController: NBParentViewController {
     let disposeBag = DisposeBag()
     var myBooksVM: MyBooksViewModel?
     var variablesInitialized = false
+    
+    var itemCount = 0
+    
+    let readerShadView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +75,11 @@ class MyBooksViewController: NBParentViewController {
                     cell.listenButtonHandler = { [weak self] in
                         self?.listenButtonHandler(at: IndexPath.init(row: row, section: 0))
                     }
+                    
+                    if self?.myBooksDataSourceVariable.value.endIndex == (row + 1) {
+                        self?.landingLogic()
+                    }
+                    
             }.disposed(by: disposeBag)
         
         myBooksTableView.rx.itemSelected.bind { [weak self] indexPath in
@@ -69,6 +89,9 @@ class MyBooksViewController: NBParentViewController {
             }.disposed(by: disposeBag)
         
         myBooksDataSourceVariable.asObservable().subscribe(onNext: { [weak self] (array) in
+            
+            self?.itemCount = array.count
+            
             if array.isEmpty && (self?.variablesInitialized ?? false){
                 self?.handleNoResultsView()
             }else{
@@ -110,16 +133,28 @@ class MyBooksViewController: NBParentViewController {
             guard let self = self else{
                 return
             }
-//            let config = FolioReaderConfig()
-//            config.displayTitle = true
-//            config.tintColor = UIColor.NBMainColor()
-//            config.canChangeScrollDirection = true
-//            config.shouldHideNavigationOnTap = false
-//            config.allowSharing = false
-//            config.enableTTS = false
-//            
-//            let folioReader = FolioReader()
-//            folioReader.presentReader(parentViewController: self, withEpubPath: downloadedURL.path, andConfig: config)
+            
+            let config = FolioReaderConfig()
+            config.shouldHideNavigationOnTap = true
+            config.scrollDirection = .vertical
+            
+            config.displayTitle = true
+            config.tintColor = UIColor.NBMainColor()
+            config.canChangeScrollDirection = true
+            config.shouldHideNavigationOnTap = false
+            config.allowSharing = false
+            config.enableTTS = false
+                        
+            DispatchQueue.main.async {
+                
+                self.readerShadView.frame = self.view.frame
+                self.readerShadView.backgroundColor = .black
+                self.view.addSubview(self.readerShadView)
+                
+                let folioReader = FolioReader()
+                folioReader.delegate = self
+                folioReader.presentReader(parentViewController: self, withEpubPath: downloadedURL.path, andConfig: config, shouldRemoveEpub: true)
+            }
         }
     }
     

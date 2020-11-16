@@ -8,9 +8,10 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 
 enum MyBooksRequests: Request {
-    case fetchUserBooks
+    case fetchUserBooks(paginator: Map?)
     
     var path: String {
         switch self {
@@ -28,8 +29,14 @@ enum MyBooksRequests: Request {
     
     var parameters: [String: Any]? {
         switch self {
-        case .fetchUserBooks:
-            return nil
+        case let .fetchUserBooks(paginator: paginator):
+            print("parameters :- \(paginator?.JSON["limit"])")
+            return ["limit": paginator?.JSON["limit"] ?? 20,
+                    "next": paginator?.JSON["next"] ?? 0,
+                    "page": paginator?.JSON["page"] ?? 1,
+                    "prev": paginator?.JSON["prev"] ?? 0,
+                    "total": paginator?.JSON["total"] ?? 20
+            ]
         }
     }
     

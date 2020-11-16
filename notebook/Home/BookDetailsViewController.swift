@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SDWebImage
-//import FolioReaderKit
+import FolioReaderKit
 
 enum UserToBookStatus {
     case writer
@@ -35,8 +35,20 @@ protocol BookDetailsDelegate: class {
 
 var bookListenerVC: BookListenerViewController?
 
-class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDelegate, BookDetailsDelegate {
 
+extension BookDetailsViewController: FolioReaderDelegate {
+    
+    func folioReader(_ folioReader: FolioReader, didFinishedLoading book: FRBook) {
+        
+    }
+    
+    func folioReaderDidClose(_ folioReader: FolioReader) {
+        self.readerShadView.removeFromSuperview()
+    }
+}
+
+class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDelegate, BookDetailsDelegate {
+    
     //Outlets
     @IBOutlet weak var bookCoverImage: UIImageView!
     @IBOutlet weak var detailsContentView: UIView!
@@ -61,6 +73,7 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
     @IBOutlet weak var printedCopyTextLabel: UILabel!
     @IBOutlet weak var printedCopyPriceLabel: UILabel!
     @IBOutlet weak var printedCopyBuyButton: UIButton!
+    @IBOutlet weak var previewLinkButton: UIButton!
     
     @IBOutlet weak var quotesTableView: IntrisicTableView!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -83,6 +96,8 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
     @IBOutlet weak var recommendBookButton: UIButton!
     @IBOutlet weak var recommendBookView: UIView!
     
+    let readerShadView = UIView()
+    
     var fromAppDelegate: Bool = false
     var bookId: String?
     private var bookDetailsVM: BookDetailsViewModel?
@@ -96,6 +111,8 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
     var bookListeningLink = ""
     var authorId: String?
     var shareLink: String?
+    var isPreviewAudio: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +137,7 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        setupPreviewButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -201,6 +219,7 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
         
         let urlString = bookDetails.cover?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         bookCoverImage.sd_setImage(with: URL(string: urlString ?? ""), placeholderImage: #imageLiteral(resourceName: "notebook_place_holder"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: nil)
+        bookCoverImage.contentMode = .scaleAspectFit
         bookGenreLabel.text = bookDetails.genre?.name
         bookNameLabel.text  = bookDetails.name
         authorId = ""
@@ -503,48 +522,114 @@ class BookDetailsViewController: NBParentViewController, UIGestureRecognizerDele
             guard let self = self else{
                 return
            }
-//            let config = FolioReaderConfig()
-//            config.displayTitle = true
-//            config.tintColor = UIColor.NBMainColor()
-//            config.canChangeScrollDirection = true
-//            config.shouldHideNavigationOnTap = false
-//            config.allowSharing = false
-//            config.enableTTS = false
-//
-//            let folioReader = FolioReader()
-//            folioReader.presentReader(parentViewController: self, withEpubPath: downloadedURL.path, andConfig: config)
+            
+            let config = FolioReaderConfig()
+            config.shouldHideNavigationOnTap = true
+            config.scrollDirection = .vertical
+            
+            config.displayTitle = true
+            config.tintColor = UIColor.NBMainColor()
+            config.canChangeScrollDirection = true
+            config.shouldHideNavigationOnTap = false
+            config.allowSharing = false
+            config.enableTTS = false
+                        
+            DispatchQueue.main.async {
+                
+                self.readerShadView.frame = self.view.frame
+                self.readerShadView.backgroundColor = .black
+                self.view.addSubview(self.readerShadView)
+                
+                let folioReader = FolioReader()
+                folioReader.delegate = self
+                folioReader.presentReader(parentViewController: self, withEpubPath: downloadedURL.path, andConfig: config, shouldRemoveEpub: true)
+            }
+        }
+    }
+    
+    func setupPreviewButton() {
+        previewLinkButton.backgroundColor = .NBGoldColor()
+        previewLinkButton.roundCorners(withRadius: 12)
+        previewLinkButton.isHidden = true
+        if let previewLink = bookDetails?.previewLink {
+            previewLink.count > 0 ? (previewLinkButton.isHidden = false) : (previewLinkButton.isHidden = true)
+        }
+    }
+    
+    @IBAction func previewLinkBtnClicked(_ sender: Any) {
+        if let previewLink = bookDetails?.previewLink {
+            bookListeningLink = previewLink
+            isPreviewAudio = true
+            openBookListener(link: previewLink)
         }
     }
     
     @objc func openBookListener(_ sender: UIButton){
         print(bookListeningLink)
+        //if (bookListenerVC?.link ?? "") != bookListeningLink{
+            openBookListener(link: bookListeningLink)
+        //}
+    }
+    
+    func openBookListener(link: String) {
+        print(link)
         let storyBoard = UIStoryboard.init(name: "Home", bundle: nil)
         if let vc = storyBoard.instantiateViewController(withIdentifier: "BookListenerViewController") as? BookListenerViewController{
-            // our propose here is to make the audio work even if the viewcontroller poped from the navigation stack so here we make checks for that.
             
             if bookListenerVC == nil{
                 // so the view contorller not opened before
                 bookListenerVC = vc
             }
             
-            if (bookListenerVC?.link ?? "") != bookListeningLink{
-                // if the current opened link equal to the link that we will opened so we will never pass the new values because they are already there.
-                bookListenerVC?.newAudioWillBeLoaded = true
-                bookListenerVC?.link = bookListeningLink
-                bookListenerVC?.coverImageLink = bookDetailsVM?.bookDetails.value.cover ?? ""
-                bookListenerVC?.bookName = bookDetailsVM?.bookDetails.value.name ?? ""
+            bookListenerVC?.newAudioWillBeLoaded = true
+            bookListenerVC?.selectedUrl = bookListeningLink
+            bookListenerVC?.coverImageLink = bookDetailsVM?.bookDetails.value.cover ?? ""
+            bookListenerVC?.bookName = bookDetailsVM?.bookDetails.value.name ?? ""
+            if isPreviewAudio {
+                isPreviewAudio = false
+                bookListenerVC?.tracksArr = nil
             }else{
-                bookListenerVC?.newAudioWillBeLoaded = false
+                bookListenerVC?.tracksArr = bookDetailsVM?.bookDetails.value.tracks ?? []
             }
             
             self.navigationController?.pushViewController(bookListenerVC!, animated: true)
         }
     }
     
+    /**
+     func openBookListener(link: String) {
+             print(link)
+             let storyBoard = UIStoryboard.init(name: "Home", bundle: nil)
+             if let vc = storyBoard.instantiateViewController(withIdentifier: "BookListenerViewController") as? BookListenerViewController{
+                 // our propose here is to make the audio work even if the viewcontroller poped from the navigation stack so here we make checks for that.
+                 
+                 if bookListenerVC == nil{
+                     // so the view contorller not opened before
+                     bookListenerVC = vc
+                 }
+                 
+                 //if (bookListenerVC?.link ?? "") != link{
+                     // if the current opened link equal to the link that we will opened so we will never pass the new values because they are already there.
+                     bookListenerVC?.newAudioWillBeLoaded = true
+                     //bookListenerVC?.link = bookListeningLink
+                     bookListenerVC?.selectedUrl = bookListeningLink
+                     bookListenerVC?.coverImageLink = bookDetailsVM?.bookDetails.value.cover ?? ""
+                     bookListenerVC?.bookName = bookDetailsVM?.bookDetails.value.name ?? ""
+                     bookListenerVC?.tracksArr = bookDetailsVM?.bookDetails.value.tracks ?? []
+     //            }else{
+     //                bookListenerVC?.newAudioWillBeLoaded = false
+     //            }
+                 
+                 self.navigationController?.pushViewController(bookListenerVC!, animated: true)
+             }
+         }
+     */
+    
     @IBAction func bookAuthorButtonClicked(_ sender: UIButton) {
         if let authorId = authorId, !authorId.isEmpty{
             let authorViewModel = AuthorViewModel()
             authorViewModel.authorId = authorId
+            authorViewModel.shareLink = self.shareLink ?? ""
             if let authorViewController = authorViewModel.initViewController(){
                 navigationController?.pushViewController(authorViewController, animated: true)
             }
@@ -677,7 +762,7 @@ extension BookDetailsViewController{
                 }
 
                 //save cart updates
-               NBParentViewController.realm?.add(cart, update: true)
+                NBParentViewController.realm?.add(cart, update: .error)
 
             }
         }catch let err{

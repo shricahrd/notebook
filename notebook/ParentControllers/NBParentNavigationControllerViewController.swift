@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
-//import RealmSwift
+import RealmSwift
 
 class NBParentNavigationControllerViewController: UINavigationController {
     
@@ -117,12 +117,17 @@ class NBParentNavigationControllerViewController: UINavigationController {
     func getCartCount() -> Int {
         var count = 0
         do {
-//            let realm = try Realm()
-//            if let cart = realm.objects(Cart.self).first{
-//                for book in cart.books{
-//                    count += book.counter
-//                }
-//            }
+            let migrationBlock: MigrationBlock = { migration, oldSchemaVersion in
+                //Leave the block empty
+                if (oldSchemaVersion < 1) {}
+            }
+            Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 1, migrationBlock: migrationBlock)
+            let realm = try Realm()
+            if let cart = realm.objects(Cart.self).first{
+                for book in cart.books{
+                    count += book.counter
+                }
+            }
             return count
             
         }catch let err {

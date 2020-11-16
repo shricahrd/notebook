@@ -20,6 +20,8 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var featuredBooksCollectionView: UICollectionView!
     @IBOutlet weak var genresCollectionView: UICollectionView!
     @IBOutlet weak var mostReadCollectionView: UICollectionView!
+    @IBOutlet weak var audioBooksCollectionView: UICollectionView!
+    @IBOutlet weak var eBooksCollectionView: UICollectionView!
     @IBOutlet weak var userGenresTableView: UITableView!
     @IBOutlet weak var bookQouteImage: UIImageView!
     @IBOutlet weak var noInternetView: UIView!
@@ -27,6 +29,8 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
     var featuredBooksDataSourceVariable = Variable<[AdBook]>([])
     var genresDataSourceVariable = Variable<[Genre]>([])
     var mostReadBooksDataSourceVariable = Variable<[AdBook]>([])
+    var audioBooksDataSourceVariable = Variable<[AdBook]>([])
+    var eBooksDataSourceVariable = Variable<[AdBook]>([])
     var userGenresDataSourceVariable = Variable<[UserGenre]>([])
     var adImageDataSourceVariable = Variable<AdImage>(AdImage())
     lazy var refreshControl = UIRefreshControl()
@@ -122,6 +126,38 @@ class HomeViewController: NBParentViewController, UICollectionViewDelegate, UICo
         
         mostReadCollectionView.rx.itemSelected.bind { [weak self] indexPath in
             if let bookDetails = self?.mostReadBooksDataSourceVariable.value[indexPath.row], let bookId = bookDetails.id{
+                self?.openBookDetails(withBook: bookDetails, bookId: bookId)
+            }
+        }.disposed(by: disposeBag)
+        
+        //MARK: audio_books
+        let audioBooksReadNib = UINib(nibName: MostReadCollectionViewCell.reusableIdentifier, bundle: nil)
+        audioBooksCollectionView.register(audioBooksReadNib, forCellWithReuseIdentifier: MostReadCollectionViewCell.reusableIdentifier)
+        audioBooksDataSourceVariable.asObservable()
+            .bind(to: audioBooksCollectionView.rx
+                .items(cellIdentifier: MostReadCollectionViewCell.reusableIdentifier, cellType: MostReadCollectionViewCell.self)){ (row, model: AdBook, cell: MostReadCollectionViewCell) in
+                    let firstAuthor = model.authors?.first?.name
+                    cell.configureCell(withImageURL: model.cover ?? "", andBookName: model.name ?? "", andBookAuthor: firstAuthor ?? "")
+        }.disposed(by: disposeBag)
+        
+        audioBooksCollectionView.rx.itemSelected.bind { [weak self] indexPath in
+            if let bookDetails = self?.audioBooksDataSourceVariable.value[indexPath.row], let bookId = bookDetails.id{
+                self?.openBookDetails(withBook: bookDetails, bookId: bookId)
+            }
+        }.disposed(by: disposeBag)
+        
+        //MARK: books
+        let eBooksReadNib = UINib(nibName: MostReadCollectionViewCell.reusableIdentifier, bundle: nil)
+        eBooksCollectionView.register(eBooksReadNib, forCellWithReuseIdentifier: MostReadCollectionViewCell.reusableIdentifier)
+        eBooksDataSourceVariable.asObservable()
+            .bind(to: eBooksCollectionView.rx
+                .items(cellIdentifier: MostReadCollectionViewCell.reusableIdentifier, cellType: MostReadCollectionViewCell.self)){ (row, model: AdBook, cell: MostReadCollectionViewCell) in
+                    let firstAuthor = model.authors?.first?.name
+                    cell.configureCell(withImageURL: model.cover ?? "", andBookName: model.name ?? "", andBookAuthor: firstAuthor ?? "")
+        }.disposed(by: disposeBag)
+        
+        eBooksCollectionView.rx.itemSelected.bind { [weak self] indexPath in
+            if let bookDetails = self?.eBooksDataSourceVariable.value[indexPath.row], let bookId = bookDetails.id{
                 self?.openBookDetails(withBook: bookDetails, bookId: bookId)
             }
         }.disposed(by: disposeBag)

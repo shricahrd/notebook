@@ -42,8 +42,8 @@ extension List: DetachableObject {
 
 /////////////////// Realm models \\\\\\\\\\\\\\\\
 class Cart: Object {
-    @objc private(set) dynamic var id = 0
-//    @objc dynamic var id = ""
+    //@objc private(set) dynamic var id = 0
+    @objc dynamic var id = ""
     @objc dynamic var userMobileNumber = ""
     @objc dynamic var totalPrice: Float = 0.0
     @objc dynamic var totalNumberOfItems = Int()
@@ -58,7 +58,8 @@ infix operator ±: AssignmentPrecedence
 
 class BookOfflineModel: Object {
     
-    @objc private(set) dynamic var id = 0
+    //@objc private(set) dynamic var id = 0
+    @objc dynamic var id = ""
     @objc dynamic var bookId = Int()
     @objc dynamic var bookName = String()
     @objc dynamic var counter: Int = 0

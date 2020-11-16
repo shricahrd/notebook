@@ -11,7 +11,11 @@ import Foundation
 final class SharedClient: APIClient {
     
     static let sharedInstance = SharedClient()
-    var baseUrl: String = "https://notebooklib.com/v2/public/api/" //"http://admin.notebooklib.com/api/"
+    
+    //var baseUrl: String = "https://notebooklib.com/admin2/public/api/"
+    //var baseUrl: String = "https://notebooklib.com/v2/public/api/"
+    
+    var baseUrl: String = "http://admin.notebooklib.com/api/"
     
     private init() {}
     

@@ -15,6 +15,7 @@ class AuthorViewModel: NBParentViewModel {
     private var searchUseCases: SearchUseCases?
     private weak var authorViewController: AuthorViewController?
     var authorId = String()
+    var shareLink = String()
     
     // this is the correct way to implement MVVM
     override init(){

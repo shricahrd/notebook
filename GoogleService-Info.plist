@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>261768062430-hiavr5egj5umk656f37u33ain8ml8l71.apps.googleusercontent.com</string>
+	<string>534539906710-b5h6pn545o7j9r7dfcmh488pj0332h7t.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.261768062430-hiavr5egj5umk656f37u33ain8ml8l71</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>261768062430-ks14t2bmq96ut3atvfuh4dkhshuueups.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.534539906710-b5h6pn545o7j9r7dfcmh488pj0332h7t</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD60Be7m9tCYsPAdnEu5zC1hGWtBZW7og4</string>
+	<string>AIzaSyDYplsdiQybRwUdhVXqU12iyiKCgrBV9C0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>261768062430</string>
+	<string>534539906710</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.clueapps.notebookapp</string>
+	<string>com.notebook.me</string>
 	<key>PROJECT_ID</key>
-	<string>notebook-8fe22</string>
+	<string>notebook-240320</string>
 	<key>STORAGE_BUCKET</key>
-	<string>notebook-8fe22.appspot.com</string>
+	<string>notebook-240320.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:261768062430:ios:283fb954bb0911e3</string>
+	<string>1:534539906710:ios:a8b6da62d860af4a169cb7</string>
 	<key>DATABASE_URL</key>
-	<string>https://notebook-8fe22.firebaseio.com</string>
+	<string>https://notebook-240320.firebaseio.com</string>
 </dict>
 </plist>

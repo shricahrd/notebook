@@ -26,7 +26,7 @@
 #import "RLMProperty_Private.h"
 #import "RLMRealm_Dynamic.h"
 #import "RLMRealm_Private.hpp"
-#import "RLMResults_Private.h"
+#import "RLMResults_Private.hpp"
 #import "RLMSchema_Private.hpp"
 #import "RLMUtil.hpp"
 
@@ -56,7 +56,6 @@ using namespace realm;
 
 @implementation RLMMigration {
     realm::Schema *_schema;
-    NSMutableDictionary *deletedObjectIndices;
 }
 
 - (instancetype)initWithRealm:(RLMRealm *)realm oldRealm:(RLMRealm *)oldRealm schema:(realm::Schema &)schema {
@@ -66,7 +65,6 @@ using namespace realm;
         _oldRealm = oldRealm;
         _schema = &schema;
         object_setClass(_oldRealm, RLMMigrationRealm.class);
-        deletedObjectIndices = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -79,39 +77,38 @@ using namespace realm;
     return self.realm.schema;
 }
 
-- (void)enumerateObjects:(NSString *)className block:(RLMObjectMigrationBlock)block {
-    // get all objects
+- (void)enumerateObjects:(NSString *)className block:(__attribute__((noescape)) RLMObjectMigrationBlock)block {
     RLMResults *objects = [_realm.schema schemaForClassName:className] ? [_realm allObjects:className] : nil;
     RLMResults *oldObjects = [_oldRealm.schema schemaForClassName:className] ? [_oldRealm allObjects:className] : nil;
 
-    if (objects && oldObjects) {
-        NSArray *deletedObjects = deletedObjectIndices[className];
-        if (!deletedObjects) {
-            deletedObjects = [NSMutableArray array];
-            deletedObjectIndices[className] = deletedObjects;
+    // For whatever reason if this is a newly added table we enumerate the
+    // objects in it, while in all other cases we enumerate only the existing
+    // objects. It's unclear how this could be useful, but changing it would
+    // also be a pointless breaking change and it's unlikely to be hurting anyone.
+    if (objects && !oldObjects) {
+        for (RLMObject *object in objects) {
+            @autoreleasepool {
+                block(nil, object);
+            }
         }
+        return;
+    }
 
-        for (long i = oldObjects.count - 1; i >= 0; i--) {
-            @autoreleasepool {
-                if ([deletedObjects containsObject:@(i)]) {
-                    continue;
-                }
-                block(oldObjects[i], objects[i]);
-            }
-        }
+    if (oldObjects.count == 0 || objects.count == 0) {
+        return;
     }
-    else if (objects) {
-        for (long i = objects.count - 1; i >= 0; i--) {
-            @autoreleasepool {
-                block(nil, objects[i]);
+
+    auto& info = _realm->_info[className];
+    for (RLMObject *oldObject in oldObjects) {
+        @autoreleasepool {
+            Obj newObj;
+            try {
+                newObj = info.table()->get_object(oldObject->_row.get_key());
             }
-        }
-    }
-    else if (oldObjects) {
-        for (long i = oldObjects.count - 1; i >= 0; i--) {
-            @autoreleasepool {
-                block(oldObjects[i], nil);
+            catch (InvalidKey const&) {
+                continue;
             }
+            block(oldObject, (id)RLMCreateObjectAccessor(info, std::move(newObj)));
         }
     }
 }
@@ -128,7 +125,6 @@ using namespace realm;
         }
 
         block(self, _oldRealm->_realm->schema_version());
-        [self deleteObjectsMarkedForDeletion];
 
         _oldRealm = nil;
         _realm = nil;
@@ -144,17 +140,7 @@ using namespace realm;
 }
 
 - (void)deleteObject:(RLMObject *)object {
-    [deletedObjectIndices[object.objectSchema.className] addObject:@(object->_row.get_index())];
-}
-
-- (void)deleteObjectsMarkedForDeletion {
-    for (NSString *className in deletedObjectIndices.allKeys) {
-        RLMResults *objects = [_realm allObjects:className];
-        for (NSNumber *index in deletedObjectIndices[className]) {
-            RLMObject *object = objects[index.longValue];
-            [_realm deleteObject:object];
-        }
-    }
+    [_realm deleteObject:object];
 }
 
 - (BOOL)deleteDataForClassName:(NSString *)name {
@@ -166,20 +152,19 @@ using namespace realm;
     if (!table) {
         return false;
     }
-
     if ([_realm.schema schemaForClassName:name]) {
         table->clear();
     }
     else {
-        realm::ObjectStore::delete_data_for_object(_realm.group, name.UTF8String);
+        _realm.group.remove_table(table->get_key());
     }
 
     return true;
 }
 
 - (void)renamePropertyForClass:(NSString *)className oldName:(NSString *)oldName newName:(NSString *)newName {
-    const char *objectType = className.UTF8String;
-    realm::ObjectStore::rename_property(_realm.group, *_schema, objectType, oldName.UTF8String, newName.UTF8String);
+    realm::ObjectStore::rename_property(_realm.group, *_schema, className.UTF8String,
+                                        oldName.UTF8String, newName.UTF8String);
 }
 
 @end
